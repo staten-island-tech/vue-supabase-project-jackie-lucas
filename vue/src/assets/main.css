@@ -1,9 +1,9 @@
 @import './base.css';
 
 #app {
-  max-width: 1280px;
+  width: auto;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0rem;
   font-weight: normal;
 }
 
@@ -30,8 +30,9 @@ a,
   #app {
     position: absolute;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 0fr 0fr;
     padding: 0;
-    right: 5%;
+    right: 1%;
+    top: 1%;
   }
 }
