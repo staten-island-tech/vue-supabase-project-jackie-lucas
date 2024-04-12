@@ -12,6 +12,23 @@
   onMounted(() => {
     getCountries()
   })
+
+  async function signUpNewUser() {  
+const { data, error } = await supabase.auth.signUp({
+  email: 'example@email.com',
+  password: 'example-password',
+})
+}
+async function signInWithEmail() {
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email: 'example@email.com',
+    password: 'example-password',
+  })
+}
+async function signOut() {
+  const { error } = await supabase.auth.signOut()
+}
+signUpNewUser(), signOut()
   </script>
 
   <template>
