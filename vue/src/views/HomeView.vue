@@ -10,29 +10,26 @@
   }
 
   onMounted(() => {
-    getCountries()
+    getCountries(),signUpNewUser()
   })
 
   async function signUpNewUser() {  
 const { data, error } = await supabase.auth.signUp({
-  email: 'example@email.com',
+  username: {username},
   password: 'example-password',
 })
 }
-async function signInWithEmail() {
-  const { data, error } = await supabase.auth.signInWithPassword({
-    email: 'example@email.com',
-    password: 'example-password',
-  })
-}
-async function signOut() {
-  const { error } = await supabase.auth.signOut()
-}
-signUpNewUser(), signOut()
   </script>
 
   <template>
     <ul>
       <li v-for="country in countries" :key="country.id">{{ country.item_name }}</li>
     </ul>
+    <form @submit.prevent="registerAnswer">
+      <h6>Username</h6>
+      <input type="text" placeholder="Username">
+      <h6>Password</h6>
+      <input type="password" placeholder="Password">
+      <button @click="" type="submit" >Submit</button>
+    </form>
   </template>
