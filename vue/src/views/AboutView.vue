@@ -8,7 +8,7 @@
             <input type="text" class="password" id="password"/>
             <br>
             <div class="LogIn">
-                <button id="SignIn" v-on:click="loginworks()">Log In</button>
+                <button id="SignIn" type="button" v-on:click="signInWithEmail(realcall)">Log In</button>
             </div>
         </form>
   </div>
@@ -44,18 +44,29 @@ async function signOut() {
   const { error } = await supabase.auth.signOut()
 }; */
 
-function loginworks(event){
-  async function signInWithEmail(event) {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email: document.getElementById("email").value,
-      password: document.getElementById("password").value,
-    })
-    console.log(email, password)
-    event.preventDefault()
-  }
-  signInWithEmail()
-  event.preventDefault()
+const DOMselectors = {
+    form : document.getElementById("form"),
+    Email : document.getElementById("email"),
+    Pass : document.getElementById("password"),
 };
+function callvalue(){
+    const callEmail = DOMselectors.Email.value;
+    const callPass = DOMselectors.Pass.value;
+
+    return{
+        email1: callEmail,
+        password1: callPass,
+    };
+}
+  const realcall = callvalue()
+  async function signInWithEmail(realcall) {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: email1,
+      password: password1,
+    })
+    console.log(email1, password1)
+  }
+
 
 </script>
 

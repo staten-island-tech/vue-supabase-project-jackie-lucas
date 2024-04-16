@@ -33,13 +33,14 @@ const supabase = createClient('https://nrcrotoefzmagfjcjkcu.supabase.co', 'eyJhb
 //   }
 // );
 
-async function signInWithEmail() {
-  const { data, error } = await supabase.auth.signInWithPassword({
-    email: 'test@email.com',
-    password: 'test-password',
-  })
-};
-signInWithEmail()
+// async function signInWithEmail() {
+//   const { data, error } = await supabase.auth.signInWithPassword({
+//     email: 'test@email.com',
+//     password: 'test-password',
+//   })
+// };
+// signInWithEmail()
+
 // async function signOut() {
 //   const { error } = await supabase.auth.signOut()
 // };
