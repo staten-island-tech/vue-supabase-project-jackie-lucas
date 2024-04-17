@@ -8,7 +8,7 @@
             <input type="text" class="password" id="password"/>
             <br>
             <div class="LogIn">
-                <button id="SignIn" type="button" v-on:click="signInWithEmail(realcall)">Log In</button>
+                <button id="SignIn" type="button" v-on:click="signInWithEmail()">Log In</button>
             </div>
         </form>
   </div>
@@ -58,8 +58,7 @@ function callvalue(){
         password1: callPass,
     };
 }
-  const realcall = callvalue()
-  async function signInWithEmail(realcall) {
+  async function signInWithEmail() {
     const { data, error } = await supabase.auth.signInWithPassword({
       email: email1,
       password: password1,
