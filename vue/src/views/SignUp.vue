@@ -1,9 +1,9 @@
 <template>
   <div>
     <form @submit.prevent>
-    <input ref="username" type="text" placeholder="Username" required/>
-    <input ref="password" type="password" placeholder="Password" required/>
-    <button @click="signUpNewUser(text, password)" type="submit" >Submit</button>
+    <input ref="user" type="text" placeholder="Username" required/>
+    <input ref="pass" type="password" placeholder="Password" required/>
+    <button @click="signUpNewUser()" type="submit" >Sign Up</button>
   </form>
   </div>
 </template>
@@ -12,18 +12,18 @@
 import { onMounted } from 'vue';
 import { supabase } from '@/supabase';
 import { ref } from 'vue';
-const user = ref(null)
-const pass = ref(null)
 onMounted(() => {
- signUpNewUser()
+const user = ref()
+const pass = ref()
+console.log(user)
 })
+async function signUpNewUser() { 
 
-async function signUpNewUser(signup) {  
 const { data, error } = await supabase.auth.signUp({
-username: user.value,
-password: pass.value,
+username: user,
+password: pass,
 })
-console.log("hi", data.user)
+console.log("hi", data)
 }
 
 </script>
