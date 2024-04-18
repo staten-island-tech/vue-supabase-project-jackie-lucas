@@ -1,34 +1,33 @@
-<template>
-    <div>
-      <form v-on:submit.prevent="signInWithEmail()">
-        <p>
-          Email:
-          <input type="text" required placeholder="email" v-model="userEmail">
-        </p>
-        <p>
-          Password:
-          <input type="text" placeholder="password" v-model="userPassword">
-        </p>
-        <button type="submit">Log In</button>
-      </form>
-    </div>
-  </template>
-  
-  
-  <script setup>
+<script setup>
   import { createClient } from '@supabase/supabase-js'
-  const supabase = createClient('https://nrcrotoefzmagfjcjkcu.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5yY3JvdG9lZnptYWdmamNqa2N1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTIxNDk5NjAsImV4cCI6MjAyNzcyNTk2MH0.FUW8l47J6vtGxGPTKn5Yw8dEWYZ_WXB0CYGzMfy22yA');
+  import { ref, watch } from "vue";
+  const supabase = createClient('https://jqyadqqblpixsptiwxbm.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpxeWFkcXFibHBpeHNwdGl3eGJtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTM0NDU5NjcsImV4cCI6MjAyOTAyMTk2N30.dwyKWPquBkG-kEyDGmft18Uu_EHGHyzudBnzVVaxK54');
  // imports Supabase and links api to file
 
 async function signInWithEmail() {
+  const emaillogged =ref("")
+  const passwordlogged = ref("")
   const { data, error } = await supabase.auth.signInWithPassword({
-    email: this.userEmail,
-    password: this.userPassword,
+    email: 'emaillogged',
+    password: 'passwordlogged',
   })
 };
 
-  </script>
+</script>
   
-  <style scoped>
-  
-  </style>
+
+<style scoped>
+</style>
+
+
+<template>
+    <form v-on:submit.prevent="signInWithEmail()">
+      <label for="email">Email:</label>
+      <input type="input" v-model="emaillogged">
+        <div>{{ email }}</div>
+      <label for="password">Password:</label>
+      <input type="input" v-model="passwordlogged">
+      <br>
+      <button type="submit">Log In</button>
+    </form>
+</template>
