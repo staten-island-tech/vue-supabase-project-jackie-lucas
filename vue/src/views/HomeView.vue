@@ -2,11 +2,12 @@
   import { ref, onMounted } from 'vue'
   import { supabase } from '@/lib/superbaseClient';
 
-  const countries = ref([])
+  const foodtable = ref([])
 
   async function getCountries() {
     const { data } = await supabase.from('food').select()
-    countries.value = data
+    foodtable.value = data
+    console.log(data)
   }
 
   onMounted(() => {
@@ -17,6 +18,6 @@
 
   <template>
     <ul>
-      <li v-for="country in countries" :key="country.id">{{ country.item_name }}</li>
+      <li v-for="foodd in foodtable" :key="foodd.id">{{ foodd.name }}</li>
     </ul>
   </template>
