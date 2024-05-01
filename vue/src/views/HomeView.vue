@@ -1,9 +1,23 @@
-<script setup>
-import TheWelcome from '../components/TheWelcome.vue'
-</script>
+  <script setup>
+  import { ref, onMounted } from 'vue'
+  import { supabase } from '@/lib/superbaseClient';
 
-<template>
-  <main>
-    <TheWelcome />
-  </main>
-</template>
+  const foodtable = ref([])
+
+  async function getCountries() {
+    const { data } = await supabase.from('food').select()
+    foodtable.value = data
+    console.log(data)
+  }
+
+  onMounted(() => {
+    getCountries()
+  })
+
+  </script>
+
+  <template>
+    <ul>
+      <li v-for="foodd in foodtable" :key="foodd.id">{{ foodd.name }}</li>
+    </ul>
+  </template>
