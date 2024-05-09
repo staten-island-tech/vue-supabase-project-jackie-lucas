@@ -1,74 +1,29 @@
-<template>
-  <div>
-     <form class="form" id="form">
-            <label for="email">Email:</label>
-            <input type="text" class="email" id="email"/>
-            <br>
-            <label for="password">Password:</label>
-            <input type="text" class="password" id="password"/>
-            <br>
-            <div class="LogIn">
-                <button id="SignIn" type="button" v-on:click="signInWithEmail()">Log In</button>
-            </div>
-        </form>
-  </div>
-</template>
-
-<script>
+<script setup>
+import { ref, watch } from "vue";
+const Uemail = ref("");
+const Upassword = ref("");
 
 import { createClient } from '@supabase/supabase-js'
-const supabase = createClient('https://jqyadqqblpixsptiwxbm.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpxeWFkcXFibHBpeHNwdGl3eGJtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTM0NDU5NjcsImV4cCI6MjAyOTAyMTk2N30.dwyKWPquBkG-kEyDGmft18Uu_EHGHyzudBnzVVaxK54')
+const supabase = createClient('https://clvholiprnxhzlcjfwtx.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNsdmhvbGlwcm54aHpsY2pmd3R4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTQ5OTgyODUsImV4cCI6MjAzMDU3NDI4NX0.M5LdflX5uBf9km5O5XOsh0OmFgOtEDbJvfJsLMPNxvg')
 // imports Supabase and links api to file
 
-/* const { data, error } = await supabase.auth.signUp(
-  {
-    email: 'test@email.com',
-    password: 'test-password',
-    options: {
-      data: {
-        first_name: 'John',
-        age: 27,
-      }
-    }
-  }
-);
-
 async function signInWithEmail() {
+  const useremail= Uemail.value;
+  const userpassword= Upassword.value;
+  console.log(useremail, userpassword);
   const { data, error } = await supabase.auth.signInWithPassword({
-    email: 'example@email.com',
-    password: 'example-password',
+    email: useremail,
+    password: userpassword,
+    //    email: Uemail.toString(),
+    //    password: Upassword.toString(),
   })
 };
-
-async function signOut() {
-  const { error } = await supabase.auth.signOut()
-}; */
-
-const DOMselectors = {
-    form : document.getElementById("form"),
-    Email : document.getElementById("email"),
-    Pass : document.getElementById("password"),
-};
-function callvalue(){
-    const callEmail = DOMselectors.Email.value;
-    const callPass = DOMselectors.Pass.value;
-
-    return{
-        email1: callEmail,
-        password1: callPass,
-    };
-}
-  async function signInWithEmail() {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email: email1,
-      password: password1,
-    })
-    console.log(email1, password1)
-  }
-
-
 </script>
 
-<style scoped>
 
-</style>
+<template>
+  <input v-model="Uemail" type="input" />
+  <input v-model="Upassword" type="input" />
+  <br>
+  <button v-on:click="signInWithEmail()">HIWORKPLS</button>
+</template>
