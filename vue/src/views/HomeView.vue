@@ -2,7 +2,6 @@
   import { ref, onMounted } from 'vue'
   import { supabase } from '@/lib/superbaseClient';
 
-  const foodtable = ref([])
 
   async function getCountries() {
     const { data } = await supabase.from('food').select()
@@ -11,7 +10,7 @@
   }
 
   onMounted(() => {
-    getCountries()
+
   })
 
   </script>

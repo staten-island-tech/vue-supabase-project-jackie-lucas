@@ -12,9 +12,9 @@
 
     <div class="wrapper">
 
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+      <nav class="nav">
+        <RouterLink class="home" to="/">Home</RouterLink>
+        <RouterLink to="/wish">About</RouterLink>
         <RouterLink to="/signup">Sign Up</RouterLink>
       </nav>
     </div>
@@ -24,6 +24,15 @@
 </template>
 
 <style scoped>
+.home {
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+  z-index: 1;
+  padding: 0;
+  margin: 0;
+}
+
 header {
   line-height: 1.5;
   max-height: 100vh;
