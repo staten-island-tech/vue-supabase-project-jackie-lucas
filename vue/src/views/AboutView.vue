@@ -14,6 +14,7 @@ async function signInWithEmail() {
     password: userpassword,
     //    email: Uemail.toString(),
     //    password: Upassword.toString(),
+    // DO PINIA LINK AND SHIT FOR WHO IS CURRENTLY LOGED IN SING LOADUSER/CLEARUSER
   })
 };
 </script>
