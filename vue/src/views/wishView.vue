@@ -11,8 +11,9 @@
     <div class="banner_container">
       <img class="banner" src="../../public/Wallpaper_Banner.jpg" />
     </div>
+    <div :class= "{vignette: on }"></div>
     <div :class="{ wished: on }">
-      <wishCard v-for="wish in wish_Char" :key="wish[i]" :wish="wish" />
+      <wishCard  v-for="wish in wish_Char" :key="wish[i]" :wish="wish" />
     </div>
   </div>
 </template>
@@ -72,6 +73,7 @@ body {
   overflow: hidden;
   box-sizing: border-box;
 }
+
 .container {
   position: absolute;
   top: 0;
@@ -94,18 +96,28 @@ body {
   filter: blur(5px);
   animation: fadeIn 3s;
 }
+.vignette{
+  z-index:1;
+  display: flex;
+  flex-wrap: wrap;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0, 0, 0, 0.8);
+}
+
 .wished {
-  z-index: 1;
+  z-index: 2;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: center;
   place-items: center;
   position: absolute;
-  gap: 1rem;
-  width: 100%;
-  height: 100%;
-  background-color: rgb(0, 0, 0, 0.8);
+  width: 120%;
+  height: 150%;
+  gap: 0rem;
+  rotate: -40deg;
 }
 .banner_container {
   position: absolute;

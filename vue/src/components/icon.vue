@@ -2,23 +2,23 @@
     <div class="wish_Card">
       <img
         class="wish_img"
-        :src="`../Character_${wish.img}_icon.webp`"
+        :src="`./src/assets/Character_${wish.img}_icon.webp`"
         :alt="`${wish.name}`"
       />
       <img
         class="wish_rarity"
-        :src="`../${wish.rarity}.webp`"
+        :src="`./src/assets/${wish.rarity}.webp`"
         :alt="`${wish.rarity} Stars`"
       />
       <div class="wish_container">
         <img
           class="wish_path"
-          :src="`../Path_${wish.path}.webp`"
+          :src="`./src/assets/Path_${wish.path}.webp`"
           :alt="`${wish.path}`"
         />
         <img
           class="wish_type"
-          :src="`../Type_${wish.type}.webp`"
+          :src="`./src/assets/Type_${wish.type}.webp`"
           :alt="`${wish.type}`"
         />
       </div>
@@ -38,12 +38,12 @@
     flex-direction: column;
     justify-content: center;
     place-items: center;
-    width: 8rem;
-    height: 25rem;
-    clip-path: ellipse(8rem 10rem at 50% 50%);
+    width: 10rem;
+    height: 10rem;
     background-color: rgb(40, 40, 40, 1);
     border: 0.2px solid rgb(255, 255, 0, 0);
-    margin: 0;
+    margin-left: 2rem;
+    margin-right: 2rem;
     transition: 0.5s;
   }
   .wish_Card:hover {
@@ -56,17 +56,18 @@
     flex-direction: row;
   }
   .wish_img {
-    width: 98%;
+    width: 0;
     height: auto;
   }
   .wish_rarity {
+    width: 0;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
   }
   
   .wish_path,
   .wish_type {
-    width: 50%;
+    width: 0;
     height: auto;
   }
   </style>

@@ -5,11 +5,25 @@ const character = [
     rarity: "five_star",
     characters: [
       {
+        name: "Acheron",
+        img: "Acheron",
+        rarity: "5",
+        path: "Nihility",
+        type: "Lightning",
+      },
+      {
         name: "Argenti",
         img: "Argenti",
         rarity: "5",
         path: "Erudition",
         type: "Physical",
+      },
+      {
+        name: "Adventurine",
+        img: "Adventurine",
+        rarity: "5",
+        path: "Preservation",
+        type: "Imaginary",
       },
       {
         name: "Bailu",
@@ -138,6 +152,13 @@ const character = [
         type: "Quantum",
       },
       {
+        name: "Sparkle",
+        img: "Sparkle",
+        rarity: "5",
+        path: "Harmony",
+        type: "Quantum",
+      },
+      {
         name: "Topaz and Numby",
         img: "Topaz_and_Numby",
         rarity: "5",
@@ -183,6 +204,13 @@ const character = [
         rarity: "4",
         path: "The_Hunt",
         type: "Wind",
+      },
+      {
+        name: "Gallagher",
+        img: "Gallagher",
+        rarity: "4",
+        path: "Abundance",
+        type: "Fire",
       },
       {
         name: "Guinaifen",
