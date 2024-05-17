@@ -23,6 +23,7 @@ async function signInWithEmail() {
 
 <template>
   <input v-model="Uemail" type="input" />
+  <br>
   <input v-model="Upassword" type="input" />
   <br>
   <button v-on:click="signInWithEmail()">Sign In</button>

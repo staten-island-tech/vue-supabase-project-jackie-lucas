@@ -19,7 +19,10 @@ import { supabase } from '@/supabase.js'
 
 <template>
   <input v-model="Nemail" type="input" />
+  <br>
   <input v-model="Npassword" type="input" />
   <br>
-  <button v-on:click="signUpNewUser()">HIWORKPLS</button>
+  <p>Please note password must be at least 6 characters</p>
+  <br>
+  <button v-on:click="signUpNewUser()">BROKEN FIX LATER</button>
 </template>
