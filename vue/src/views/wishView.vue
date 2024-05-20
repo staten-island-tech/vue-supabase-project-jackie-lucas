@@ -66,6 +66,9 @@ function clear() {
 </script>
 
 <style scoped>
+div, button, img{
+  overflow: hidden;
+}
 html,
 body {
   margin: 0;
