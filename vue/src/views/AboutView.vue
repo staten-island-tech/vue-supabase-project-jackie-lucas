@@ -1,25 +1,30 @@
 <script setup>
-import { onMounted, ref } from 'vue'
-import Account from '../components/Account.vue'
-import Auth from '../components/Auth.vue'
-import { supabase } from '@/supabase';
+import { ref, watch } from "vue";
+const Uemail = ref("");
+const Upassword = ref("");
 
-const session = ref()
+import { supabase } from '@/supabase.js'
 
-onMounted(() => {
-  supabase.auth.getSession().then(({ data }) => {
-    session.value = data.session
+async function signInWithEmail() {
+  const logged = false
+  const useremail= Uemail.value;
+  const userpassword= Upassword.value;
+  console.log(useremail, userpassword);
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email: useremail,
+    password: userpassword,
   })
-
-  supabase.auth.onAuthStateChange((_, _session) => {
-    session.value = _session
-  })
-})
+  if (error) {
+      alert('Incorrect Login Credentials')
+  };
+}
 </script>
 
+
 <template>
-  <div class="container" style="padding: 50px 0 100px 0">
-    <Account v-if="session" :session="session" />
-    <Auth v-else />
-  </div>
+  <input v-model="Uemail" type="input" />
+  <br>
+  <input v-model="Upassword" type="input" />
+  <br>
+  <button v-on:click="signInWithEmail()">Sign In</button>
 </template>

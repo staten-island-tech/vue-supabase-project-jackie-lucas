@@ -1,23 +1,28 @@
-  <script setup>
-  import { ref, onMounted } from 'vue'
-  import { supabase } from '@/lib/superbaseClient';
+<script setup>
+import { ref, watch } from "vue";
+const Nemail = ref("");
+const Npassword = ref("");
 
-  const foodtable = ref([])
+import { supabase } from '@/supabase.js'
 
-  async function getCountries() {
-    const { data } = await supabase.from('food').select()
-    foodtable.value = data
-    console.log(data)
-  }
-
-  onMounted(() => {
-    getCountries()
+  async function signUpNewUser() {
+  const newemail= Nemail.value;
+  const newpassword= Npassword.value;  
+  console.log(newemail, newpassword)
+  const { data, error } = await supabase.auth.signUp({
+    email: newemail,
+    password: newpassword,
   })
+}
+</script>
 
-  </script>
 
-  <template>
-    <ul>
-      <li v-for="foodd in foodtable" :key="foodd.id">{{ foodd.name }}</li>
-    </ul>
-  </template>
+<template>
+  <input v-model="Nemail" type="input" />
+  <br>
+  <input v-model="Npassword" type="input" />
+  <br>
+  <p>Please note password must be at least 6 characters</p>
+  <br>
+  <button v-on:click="signUpNewUser()">Sign Up</button> <!-- NO LONGER BROKEEEN REEL -->
+</template>
