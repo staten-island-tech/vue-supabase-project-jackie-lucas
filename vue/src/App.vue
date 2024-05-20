@@ -1,10 +1,23 @@
 <script setup>
+import { RouterLink, RouterView } from 'vue-router'
+import { onMounted, ref } from 'vue'
+/* import Account from './components/Account.vue'
+import Auth from './components/Auth.vue'
+import { supabase } from './supabase'
+const session = ref()
+
+onMounted(() => {
+  supabase.auth.getSession().then(({ data }) => {
+    session.value = data.session
+  })
+
+  supabase.auth.onAuthStateChange((_, _session) => {
+    session.value = _session
+  })
+}) */
 </script>
 
 <template>
-   <div class="container" style="padding: 50px 0 100px 0">
-  </div>
-
   <div class="container" style="padding: 50px 0 100px 0">
   </div>
   <header>
@@ -15,7 +28,7 @@
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/signup">Sign Up</RouterLink>
+        <RouterLink to="/test">test</RouterLink>
       </nav>
     </div>
   </header>
