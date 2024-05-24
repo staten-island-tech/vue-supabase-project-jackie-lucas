@@ -5,8 +5,8 @@
       <img :class="{ Wish_close: on }" src="../../public/Icon_Close.png" />
     </button>
     <div class="WarpBtn">
-      <button class="Warp1x" v-on:click="iteration(1)">Warp 1×</button>
-      <button class="Warp10x" v-on:click="iteration(10)">Warp 10×</button>
+      <button class="Warp1x" v-on:click="char_Rarity(1)">Warp 1×</button>
+      <button class="Warp10x" v-on:click="char_Rarity(10)">Warp 10×</button>
     </div>
     <div class="banner_container">
       <img class="banner" src="../../public/Wallpaper_Banner.jpg" />
@@ -25,6 +25,7 @@ import { ref } from "vue";
 import wishCard from "@/components/icon.vue";
 
 const wish_Char = ref([]);
+const wish_List = ref([]);
 const on = ref(false);
 function random_Rarity(rate) {
   let total = 0;
@@ -42,8 +43,12 @@ function random_Rarity(rate) {
   }
   return -1;
 }
-function iteration(times) {
+function char_Rarity(times) {
+
+  iteration(times)
   on.value = true;
+}
+function iteration(times) {
   wish_Char.value = [];
   for (let i = 0; i < times; i++) {
     let rarity = random_Rarity(rates);
@@ -52,7 +57,12 @@ function iteration(times) {
     );
     let random_Character = character[rarity].characters[random_Character_Index];
     wish_Char.value.push(random_Character);
+    wish_List.value.push(random_Character);
   }
+  wish_Char.value.forEach(wishedChar => {
+  console.log(wishedChar.rarity)  
+  });
+  console.log(wish_Char.value)
 }
 
 function display_Char(values) {
