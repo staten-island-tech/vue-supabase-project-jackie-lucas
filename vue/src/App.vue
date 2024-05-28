@@ -21,8 +21,6 @@ onMounted(() => {
   <div class="container" style="padding: 50px 0 100px 0">
   </div>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
     <div class="wrapper">
 
       <nav>
@@ -39,14 +37,6 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.home {
-  position: absolute;
-  left: 0;
-  top: 0.5rem;
-  z-index: 1;
-  padding: 0;
-  margin: 0;
-} 
 
 header {
   line-height: 1.5;
@@ -64,6 +54,14 @@ nav {
   text-align: center;
   margin-top: 2rem;
 }
+.home {
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+  z-index: 1;
+  padding: 0;
+  margin: 0;
+} 
 
 nav a.router-link-exact-active {
   color: var(--color-text);

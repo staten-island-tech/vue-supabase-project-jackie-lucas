@@ -11,9 +11,12 @@
     <div class="banner_container">
       <img class="banner" src="../../public/Wallpaper_Banner.jpg" />
     </div>
+    <source :class="{fivepulled: fiveStar}" src="../../public/train.mp4" type="video/mp4" />
+    <source :class="{fourpulled: fourStar}" src="../../public/train.mp4" type="video/mp4" />
+    <source :class="{threepulled: threeStar}" src="../../public/train.mp4" type="video/mp4" />
     <div :class= "{vignette: on }"></div>
     <div :class="{ wished: on }">
-      <wishCard  v-for="wish in wish_Char" :key="wish[i]" :wish="wish" />
+      <wishCard  v-for="wish in wish_Char" :key="wish.value" :wish="wish" />
     </div>
   </div>
 </template>
@@ -27,6 +30,9 @@ import wishCard from "@/components/icon.vue";
 const wish_Char = ref([]);
 const wish_List = ref([]);
 const on = ref(false);
+const fiveStar = ref(false);
+const fourStar = ref(false);
+const threeStar = ref(false);
 function random_Rarity(rate) {
   let total = 0;
   for (let i = 0; i < rate.length; i++) {
@@ -60,7 +66,13 @@ function iteration(times) {
     wish_List.value.push(random_Character);
   }
   wish_Char.value.forEach(wishedChar => {
-  console.log(wishedChar.rarity)  
+  if(wishedChar.rarity == 5){
+    fiveStar.value = true
+    console.log(fiveStar)
+  }
+  elif(wishedChar.rarity == 4){
+    fourStar.value = true
+  }
   });
   console.log(wish_Char.value)
 }
@@ -87,6 +99,15 @@ body {
   box-sizing: border-box;
 }
 
+.fivepulled, .fourpulled,.threepulled{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 100;
+}
 .container {
   position: absolute;
   top: 0;
@@ -127,10 +148,10 @@ body {
   justify-content: center;
   place-items: center;
   position: absolute;
-  width: 120%;
-  height: 150%;
-  gap: 0rem;
-  rotate: -40deg;
+  gap: 1rem;
+  width: 100%;
+  height: 100%;
+  
 }
 .banner_container {
   position: absolute;
@@ -194,7 +215,7 @@ body {
   border: 0;
   font: bold 30px Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   color: rgb(173, 129, 248);
-  z-index: 100;
+  z-index: 99;
   background-color: transparent;
   transition: 0.5s;
 }
