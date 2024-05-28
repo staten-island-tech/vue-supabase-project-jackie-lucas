@@ -16,7 +16,9 @@ async function signInWithEmail() {
   })
   if (error) {
       alert('Incorrect Login Credentials')
-  };
+  }
+
+
 }
 </script>
 
