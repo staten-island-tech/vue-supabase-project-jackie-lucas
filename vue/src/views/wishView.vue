@@ -67,11 +67,12 @@ function iteration(times) {
   }
   wish_Char.value.forEach(wishedChar => {
   if(wishedChar.rarity == 5){
-    fiveStar.value = true
-    console.log(fiveStar)
+/*     fiveStar.value = true */
+    console.log(fiveStar.value, "five", wishedChar.name)
   }
-  elif(wishedChar.rarity == 4){
-    fourStar.value = true
+  else if(wishedChar.rarity == 4){
+/*     fourStar.value = true */
+    console.log(fourStar.value, "four",wishedChar.name)
   }
   });
   console.log(wish_Char.value)
@@ -150,7 +151,7 @@ body {
   position: absolute;
   gap: 1rem;
   width: 100%;
-  height: 100%;
+  height: 80%;
   
 }
 .banner_container {
