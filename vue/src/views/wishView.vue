@@ -11,16 +11,17 @@
     <div class="banner_container">
       <img class="banner" src="../../public/Wallpaper_Banner.jpg" />
     </div>
-    <div><video autoplay>
+    <video autoplay :class="wishing, { fivepulled: fiveStar }" @ended="hideRoll(), this.currentTime = 0, this.pause()">
         <source src="../../public/fivestarpulled.mp4" type="video/mp4" />
-      </video></div>
-    <div :class="{ fourpulled: fourStar }"> <video autoplay>
-        <source src="../../public/fourstarpulled.mp4" type="video/mp4" />
-      </video></div>
-    <div :class="{ threepulled: threeStar }"> <video autoplay>
-        <source src="../../public/threestarpulled.mp4" type="video/mp4" />
-      </video></div>
+      </video>
 
+      <video autoplay :class="wishing,{ fourpulled: fourStar }" @ended="hideRoll() , this.currentTime = 0, this.pause()">
+        <source  src="../../public/fourstarpulled.mp4" type="video/mp4" />
+      </video>
+
+      <video autoplay :class="wishing,{ threepulled: threeStar }" @ended="hideRoll(), this.currentTime = 0, this.pause()">
+        <source src="../../public/threestarpulled.mp4" type="video/mp4" />
+      </video>
     <div :class="{ vignette: on }"></div>
     <div :class="{ wished: on }">
       <wishCard v-for="wish in wish_Char" :key="wish.value" :wish="wish" />
@@ -33,14 +34,17 @@ import rates from "@/components/character.js";
 import { character } from "@/components/character.js";
 import { ref } from "vue";
 import wishCard from "@/components/icon.vue";
-
-const wish_Char = ref([]);
-const wish_List = ref([]);
 const on = ref(false);
 const fiveStar = ref(false);
 const fourStar = ref(false);
 const threeStar = ref(false);
-
+const wish_Char = ref([]);
+const wish_List = ref([]);
+function hideRoll(){
+fiveStar = false;
+fourStar = false;
+threeStar = false;
+}
 function random_Rarity(rate) {
   let total = 0;
   for (let i = 0; i < rate.length; i++) {
@@ -60,9 +64,9 @@ function random_Rarity(rate) {
 function char_Rarity(times) {
   iteration(times)
   on.value = true;
-  const fiveStar = ref(false);
-  const fourStar = ref(false);
-  const threeStar = ref(false);
+  fiveStar.value = false;
+  fourStar.value = false;
+  threeStar.value = false;
 }
 function iteration(times) {
   wish_Char.value = [];
@@ -76,15 +80,21 @@ function iteration(times) {
     wish_List.value.push(random_Character);
   }
   if (wish_Char.value.some(wishedChar => wishedChar.rarity == 5)) {
+  threeStar.value= false;
+  fourStar.value= false;
   fiveStar.value = true;
   const fiveStarChar = wish_Char.value.find(char => char.rarity == 5);
     console.log(fiveStar.value, "five", fiveStarChar.name);
 } else if (wish_Char.value.some(wishedChar => wishedChar.rarity == 4)) {
-  fourStar.value = true;
+  threeStar.value= false;
+  fourStar.value= true;
+  fiveStar.value = false;
   const fourStarChar = wish_Char.value.find(char => char.rarity == 4);
     console.log(fourStar.value, "four", fourStarChar.name);
 } else if (wish_Char.value.some(wishedChar => wishedChar.rarity == 3)) {
-  threeStar.value = true;
+  threeStar.value= true;
+  fourStar.value= false;
+  fiveStar.value = false;
   const threeStarChar = wish_Char.value.find(char => char.rarity == 3);
     console.log(threeStar.value, "three", threeStarChar.name);
 }
@@ -116,17 +126,19 @@ body {
   overflow: hidden;
   box-sizing: border-box;
 }
+.wishing{
 
-source.fivepulled,
-source.fourpulled,
-source.threepulled {
-  position: absolute;
+}
+.wishingfivepulled,
+.wishingfourpulled,
+.wishingthreepulled {
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: 50;
+  z-index: 0;
 }
 
 .container {
