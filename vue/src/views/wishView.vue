@@ -11,12 +11,19 @@
     <div class="banner_container">
       <img class="banner" src="../../public/Wallpaper_Banner.jpg" />
     </div>
-    <source :class="{fivepulled: fiveStar}" src="../../public/train.mp4" type="video/mp4" />
-    <source :class="{fourpulled: fourStar}" src="../../public/train.mp4" type="video/mp4" />
-    <source :class="{threepulled: threeStar}" src="../../public/train.mp4" type="video/mp4" />
-    <div :class= "{vignette: on }"></div>
+    <div><video autoplay>
+        <source src="../../public/fivestarpulled.mp4" type="video/mp4" />
+      </video></div>
+    <div :class="{ fourpulled: fourStar }"> <video autoplay>
+        <source src="../../public/fourstarpulled.mp4" type="video/mp4" />
+      </video></div>
+    <div :class="{ threepulled: threeStar }"> <video autoplay>
+        <source src="../../public/threestarpulled.mp4" type="video/mp4" />
+      </video></div>
+
+    <div :class="{ vignette: on }"></div>
     <div :class="{ wished: on }">
-      <wishCard  v-for="wish in wish_Char" :key="wish.value" :wish="wish" />
+      <wishCard v-for="wish in wish_Char" :key="wish.value" :wish="wish" />
     </div>
   </div>
 </template>
@@ -33,6 +40,7 @@ const on = ref(false);
 const fiveStar = ref(false);
 const fourStar = ref(false);
 const threeStar = ref(false);
+
 function random_Rarity(rate) {
   let total = 0;
   for (let i = 0; i < rate.length; i++) {
@@ -50,9 +58,11 @@ function random_Rarity(rate) {
   return -1;
 }
 function char_Rarity(times) {
-
   iteration(times)
   on.value = true;
+  const fiveStar = ref(false);
+  const fourStar = ref(false);
+  const threeStar = ref(false);
 }
 function iteration(times) {
   wish_Char.value = [];
@@ -65,17 +75,21 @@ function iteration(times) {
     wish_Char.value.push(random_Character);
     wish_List.value.push(random_Character);
   }
-  wish_Char.value.forEach(wishedChar => {
-  if(wishedChar.rarity == 5){
-/*     fiveStar.value = true */
-    console.log(fiveStar.value, "five", wishedChar.name)
-  }
-  else if(wishedChar.rarity == 4){
-/*     fourStar.value = true */
-    console.log(fourStar.value, "four",wishedChar.name)
-  }
-  });
-  console.log(wish_Char.value)
+  if (wish_Char.value.some(wishedChar => wishedChar.rarity == 5)) {
+  fiveStar.value = true;
+  const fiveStarChar = wish_Char.value.find(char => char.rarity == 5);
+    console.log(fiveStar.value, "five", fiveStarChar.name);
+} else if (wish_Char.value.some(wishedChar => wishedChar.rarity == 4)) {
+  fourStar.value = true;
+  const fourStarChar = wish_Char.value.find(char => char.rarity == 4);
+    console.log(fourStar.value, "four", fourStarChar.name);
+} else if (wish_Char.value.some(wishedChar => wishedChar.rarity == 3)) {
+  threeStar.value = true;
+  const threeStarChar = wish_Char.value.find(char => char.rarity == 3);
+    console.log(threeStar.value, "three", threeStarChar.name);
+}
+
+
 }
 
 function display_Char(values) {
@@ -89,9 +103,12 @@ function clear() {
 </script>
 
 <style scoped>
-div, button, img{
+div,
+button,
+img {
   overflow: hidden;
 }
+
 html,
 body {
   margin: 0;
@@ -100,15 +117,18 @@ body {
   box-sizing: border-box;
 }
 
-.fivepulled, .fourpulled,.threepulled{
+source.fivepulled,
+source.fourpulled,
+source.threepulled {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: 100;
+  z-index: 50;
 }
+
 .container {
   position: absolute;
   top: 0;
@@ -131,8 +151,9 @@ body {
   filter: blur(5px);
   animation: fadeIn 3s;
 }
-.vignette{
-  z-index:1;
+
+.vignette {
+  z-index: 1;
   display: flex;
   flex-wrap: wrap;
   position: absolute;
@@ -152,8 +173,9 @@ body {
   gap: 1rem;
   width: 100%;
   height: 80%;
-  
+
 }
+
 .banner_container {
   position: absolute;
   top: 8%;
@@ -164,6 +186,7 @@ body {
   justify-content: center;
   animation: slidein 1s forwards;
 }
+
 .banner {
   display: flex;
   flex-wrap: wrap;
@@ -202,6 +225,7 @@ body {
   color: rgb(175, 130, 250);
   overflow: hidden;
 }
+
 .Clear,
 .Wish_close {
   display: flex;
@@ -220,11 +244,13 @@ body {
   background-color: transparent;
   transition: 0.5s;
 }
+
 .Clear:hover {
   border: 0;
   background-color: transparent;
   opacity: 20%;
 }
+
 .Warp1x:active,
 .Warp10x:active {
   opacity: 80%;
@@ -272,6 +298,7 @@ button:hover {
   from {
     transform: translateY(150rem);
   }
+
   to {
     transform: translateY(0);
   }
