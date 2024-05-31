@@ -11,15 +11,15 @@
     <div class="banner_container">
       <img class="banner" src="../../public/Wallpaper_Banner.jpg" />
     </div>
-    <video autoplay :class="wishing, { fivepulled: fiveStar }" @ended="hideRoll(), this.currentTime = 0, this.pause()">
+    <video autoplay :class="{ fivepulled: fiveStar }" @ended="hideRoll(), this.currentTime = 0, this.pause()">
         <source src="../../public/fivestarpulled.mp4" type="video/mp4" />
       </video>
 
-      <video autoplay :class="wishing,{ fourpulled: fourStar }" @ended="hideRoll() , this.currentTime = 0, this.pause()">
+      <video autoplay :class="{ fourpulled: fourStar }" @ended="hideRoll() , this.currentTime = 0, this.pause()">
         <source  src="../../public/fourstarpulled.mp4" type="video/mp4" />
       </video>
 
-      <video autoplay :class="wishing,{ threepulled: threeStar }" @ended="hideRoll(), this.currentTime = 0, this.pause()">
+      <video autoplay :class="{ threepulled: threeStar }" @ended="hideRoll(), this.currentTime = 0, this.pause()">
         <source src="../../public/threestarpulled.mp4" type="video/mp4" />
       </video>
     <div :class="{ vignette: on }"></div>
@@ -125,9 +125,6 @@ body {
   height: 100%;
   overflow: hidden;
   box-sizing: border-box;
-}
-.wishing{
-
 }
 .wishingfivepulled,
 .wishingfourpulled,
