@@ -21,7 +21,6 @@ onMounted(() => {
   <div class="container" style="padding: 50px 0 100px 0">
   </div>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
 
