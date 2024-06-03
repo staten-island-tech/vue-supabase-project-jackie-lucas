@@ -23,14 +23,10 @@ onMounted(() => {
   <header>
     <div class="wrapper">
 
-      <nav>
-        <RouterLink to="/" class="home"><img id="home" width="200rem" src="../public/Icon_Home.png" alt="Home"></RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/test">test</RouterLink>
-        <RouterLink to="/wish">help me</RouterLink>
-        <RouterLink to="/character">help me v32</RouterLink>
-      </nav>
-    </div>
+<nav>
+  <RouterLink to="/" class="home"><img id="home" width="200rem" src="../public/Icon_Home.png" alt="Home"></RouterLink>
+</nav>
+</div>
   </header>
 
   <RouterView />
@@ -49,6 +45,7 @@ header {
 }
 
 nav {
+
   width: 100%;
   font-size: 12px;
   text-align: center;

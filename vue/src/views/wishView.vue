@@ -6,7 +6,7 @@
     </button>
     <div class="WarpBtn">
       <button class="Warp1x" v-on:click="char_Rarity(1)">Warp 1×</button>
-      <button class="Warp10x" v-on:click="char_Rarity(10)">Warp 10×</button>
+      <button class="Warp10x" v-on:click="char_Rarity(12)">Warp 12×</button>
     </div>
     <div class="banner_container">
       <img class="banner" src="../../public/Wallpaper_Banner.jpg" />
@@ -19,7 +19,7 @@
         <source  src="../../public/fourstarpulled.mp4" type="video/mp4" />
       </video>
 
-      <video autoplay :class="{ threepulled: threeStar }" @ended="hideRoll(), this.currentTime = 0, this.pause()">
+      <video autoplay :class="{ threepulled: threeStar }" @ended="hideRoll()">
         <source src="../../public/threestarpulled.mp4" type="video/mp4" />
       </video>
     <div :class="{ vignette: on }"></div>
@@ -44,6 +44,8 @@ function hideRoll(){
 fiveStar = false;
 fourStar = false;
 threeStar = false;
+this.currentTime = 0;
+this.pause();
 }
 function random_Rarity(rate) {
   let total = 0;

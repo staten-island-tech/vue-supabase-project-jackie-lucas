@@ -1,27 +1,29 @@
 <template>
     <div class="wish_Card">
+      <p class="wish_name">{{ wish.name }}</p>
       <img
         class="wish_img"
         :src="`../../public/Character_${wish.img}_icon.webp`"
         :alt="`${wish.name}`"
       />
+      
       <img
         class="wish_rarity"
         :src="`../../public/${wish.rarity}.webp`"
         :alt="`${wish.rarity} Stars`"
       />
       <div class="wish_container">
-        <p class="wish_name">{{ wish.name }}</p>
+<img
+          class="wish_type"
+          :src="`../../public/Type_${wish.type}.webp`"
+          :alt="`${wish.type}`"
+        />
         <img
           class="wish_path"
           :src="`../../public/Path_${wish.path}.webp`"
           :alt="`${wish.path}`"
         />
-        <img
-          class="wish_type"
-          :src="`../../public/Type_${wish.type}.webp`"
-          :alt="`${wish.type}`"
-        />
+        
       </div>
     </div>
   </template>
@@ -40,7 +42,7 @@
     justify-content: center;
     place-items: center;
     width: 20rem;
-    height: 10rem;
+    height: 12rem;
     background-color: rgb(40, 40, 40, 1);
     border: 0.2px solid rgb(255, 255, 0, 0);
     margin-left: 2rem;
@@ -56,6 +58,7 @@
     display: flex;
     flex: wrap;
     flex-direction: column;
+    gap: 0.5rem;
   }
   .wish_img {
     width: 10rem;

@@ -19,8 +19,8 @@ const character = [
         type: "Physical",
       },
       {
-        name: "Adventurine",
-        img: "Adventurine",
+        name: "Aventurine",
+        img: "Aventurine",
         rarity: "5",
         path: "Preservation",
         type: "Imaginary",
@@ -357,6 +357,14 @@ const character = [
         path: "None",
         type: "None",
       },
+      {
+        name: "Along the Passing Shore",
+        img: "AcheronLC",
+        rarity: 3,
+        path: "Nihility",
+        type: "Lightning",
+      },
+
     ],
   },
 ];
