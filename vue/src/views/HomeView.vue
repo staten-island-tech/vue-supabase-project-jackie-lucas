@@ -14,7 +14,15 @@ import { supabase } from '@/supabase.js'
   const { data, error } = await supabase.auth.signUp({
     email: newemail,
     password: newpassword,
+    options: {
+      emailRedirectTo: 'http://localhost:5173/about',
+    },
   })
+  if (error) {
+    alert("There was an error when creating your account.")
+  } else {
+    alert("Sign Up completed, please Sign In")
+  }
 }
 </script>
 
