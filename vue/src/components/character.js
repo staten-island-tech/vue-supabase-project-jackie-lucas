@@ -1,4 +1,4 @@
-const rarity = [17.3, 32.7, 50];
+const rarity = [1, 13.5, 85.5];
 //const rarity = [100, 0, 0]; //Cheated Rates Guarenteed Character
 const character = [
   {
@@ -19,8 +19,8 @@ const character = [
         type: "Physical",
       },
       {
-        name: "Adventurine",
-        img: "Adventurine",
+        name: "Aventurine",
+        img: "Aventurine",
         rarity: "5",
         path: "Preservation",
         type: "Imaginary",
@@ -68,7 +68,7 @@ const character = [
         type: "Imaginary",
       },
       {
-        name: "Dr.Ratio",
+        name: "Dr. Ratio",
         img: "Dr._Ratio",
         rarity: "5",
         path: "The_Hunt",
@@ -96,7 +96,7 @@ const character = [
         type: "Fire",
       },
       {
-        name: "HuoHuo",
+        name: "Huohuo",
         img: "Huohuo",
         rarity: "5",
         path: "Abundance",
@@ -129,6 +129,13 @@ const character = [
         rarity: "5",
         path: "Abundance",
         type: "Imaginary",
+      },
+      {
+        name: "Robin",
+        img: "Robin",
+        rarity: "5",
+        path: "Harmony",
+        type: "Physical",
       },
       {
         name: "Ruan Mei",
@@ -357,6 +364,14 @@ const character = [
         path: "None",
         type: "None",
       },
+      {
+        name: "Along the Passing Shore",
+        img: "AcheronLC",
+        rarity: 3,
+        path: "Nihility",
+        type: "Lightning",
+      },
+
     ],
   },
 ];

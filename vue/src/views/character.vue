@@ -1,13 +1,10 @@
 <template>
     <img
-      class="Character_bg"
-      src="../../public/Wallpaper_Ingenium_Dreams.webp"
-      alt="Wallpaper Ingenium Dreams"
-    />
+      class="Character_bg" src="../../public/Wallpaper_Ingenium_Dreams.webp" alt="Wallpaper Ingenium Dreams"/>
     <div class="rarities">
       <div class="rarity" v-for="rarities in character" :key="rarities.rarity">
         <charCard
-          v-for="char in rarities.characters"
+          v-for="char in rarities.characters.sort()"
           :key="char.name"
           :character="char"
         />
@@ -29,7 +26,7 @@
     object-fit: cover;
     top: 0;
     left: 0;
-    z-index: -1;
+    z-index: 0;
   }
   
   .rarities {
@@ -56,5 +53,6 @@
       top: 20rem;
     }
   }
+
   </style>
   

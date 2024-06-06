@@ -1,19 +1,41 @@
 <template>
   <div class="container">
     <img class="Wish_bg" src="../../public/Wish_bg.avif" />
-    <button :class="{ clear: on }" v-on:click="clear()">
-      <img :class="{ Wish_close: on }" src="../../public/Icon_Close.png" />
+    <button class="clear" v-if="on" v-on:click="clear()">
+      <img class="Wish_close" v-if="on" src="../../public/Icon_Close.png" />
     </button>
     <div class="WarpBtn">
-      <button class="Warp1x" v-on:click="iteration(1)">Warp 1×</button>
-      <button class="Warp10x" v-on:click="iteration(10)">Warp 10×</button>
+      <button class="Warp1x" v-on:click="char_Rarity(1)">Warp 1×</button>
+      <button class="Warp10x" v-on:click="char_Rarity(10)">Warp 10×</button>
     </div>
     <div class="banner_container">
       <img class="banner" src="../../public/Wallpaper_Banner.jpg" />
     </div>
-    <div :class= "{vignette: on }"></div>
-    <div :class="{ wished: on }">
-      <wishCard  v-for="wish in wish_Char" :key="wish[i]" :wish="wish" />
+    <video class="warpVideo" v-if="fiveStar" autoplay @ended="hideRoll" ref="video">
+      <source src="../../public/fivestarpulled.mp4" type="video/mp4" />
+    </video>
+
+    <video class="warpVideo" v-if="fourStar" autoplay @ended="hideRoll" ref="video">
+      <source src="../../public/fourstarpulled.mp4" type="video/mp4" />
+    </video>
+
+    <video class="warpVideo" v-if="threeStar" autoplay @ended="hideRoll" ref="video">
+      <source src="../../public/threestarpulled.mp4" type="video/mp4" />
+    </video>
+
+    <button class=skip v-if="fiveStar" v-on:click="skipVideo">
+      <img class="Skip_wish" v-if="fiveStar" src="../../public/Skip_Button.webp" />
+    </button>
+    <button class=Skip v-if="fourStar" v-on:click="skipVideo">
+      <img class="Skip_wish" v-if="fourStar" src="../../public/Skip_Button.webp" />
+    </button>
+    <button class=Skip v-if="threeStar" v-on:click="skipVideo">
+      <img class="Skip_wish" v-if="threeStar" src="../../public/Skip_Button.webp" />
+    </button>
+    
+    <img class="vignette" v-if="on" src="../../public/Warp_Result.webp" />
+    <div class="wished" v-if="on">
+      <wishCard v-for="wish in wish_Char" :key="wish.value" :wish="wish" />
     </div>
   </div>
 </template>
@@ -24,8 +46,22 @@ import { character } from "@/components/character.js";
 import { ref } from "vue";
 import wishCard from "@/components/icon.vue";
 
-const wish_Char = ref([]);
 const on = ref(false);
+const fiveStar = ref(false);
+const fourStar = ref(false);
+const threeStar = ref(false);
+const wish_Char = ref([]);
+const wish_List = ref([]);
+const video = ref(null);
+function skipVideo(){
+  video.value.currentTime = video.value.duration;
+}
+function hideRoll() {
+  fiveStar.value = false;
+  fourStar.value = false;
+  threeStar.value = false;
+  on.value = true
+}
 function random_Rarity(rate) {
   let total = 0;
   for (let i = 0; i < rate.length; i++) {
@@ -42,8 +78,10 @@ function random_Rarity(rate) {
   }
   return -1;
 }
+function char_Rarity(times) {
+  iteration(times)
+}
 function iteration(times) {
-  on.value = true;
   wish_Char.value = [];
   for (let i = 0; i < times; i++) {
     let rarity = random_Rarity(rates);
@@ -52,7 +90,23 @@ function iteration(times) {
     );
     let random_Character = character[rarity].characters[random_Character_Index];
     wish_Char.value.push(random_Character);
+    wish_List.value.push(random_Character);
   }
+  if (wish_Char.value.some(wishedChar => wishedChar.rarity == 5)) {
+  fiveStar.value = true;
+  const fiveStarChar = wish_Char.value.find(char => char.rarity == 5);
+  console.log(fiveStar.value, "five", fiveStarChar.name);
+} else if (wish_Char.value.some(wishedChar => wishedChar.rarity == 4)) {
+  fourStar.value= true;
+  const fourStarChar = wish_Char.value.find(char => char.rarity == 4);
+  console.log(fourStar.value, "four", fourStarChar.name);
+} else if (wish_Char.value.some(wishedChar => wishedChar.rarity == 3)) {
+  threeStar.value= true;
+  const threeStarChar = wish_Char.value.find(char => char.rarity == 3);
+  console.log(threeStar.value, "three", threeStarChar.name);
+}
+
+
 }
 
 function display_Char(values) {
@@ -66,9 +120,12 @@ function clear() {
 </script>
 
 <style scoped>
-div, button, img{
+div,
+button,
+img {
   overflow: hidden;
 }
+
 html,
 body {
   margin: 0;
@@ -87,9 +144,16 @@ body {
   justify-content: center;
   align-items: center;
 }
-
+.warpVideo {
+  z-index: 91;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
 .Wish_bg {
-  opacity: 0;
   position: absolute;
   top: 0;
   left: 0;
@@ -98,32 +162,36 @@ body {
   object-fit: cover;
   filter: blur(5px);
   animation: fadeIn 3s;
+  z-index: -1;
 }
-.vignette{
-  z-index:1;
+
+.vignette {
+  z-index: 1;
   display: flex;
   flex-wrap: wrap;
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: rgb(0, 0, 0, 0.8);
+  background-color: rgb(0, 0, 0, 1);
 }
 
 .wished {
-  z-index: 2;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: center;
-  place-items: center;
-  position: absolute;
-  width: 120%;
-  height: 150%;
-  gap: 0rem;
-  rotate: -40deg;
+    top: 5%;
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: center;
+    row-gap: 1rem;
+    column-gap: 0rem;
+    width: 120%;
+    height: 80%; 
+    overflow: hidden;
+    z-index: 1;
+    position: absolute;
+    margin: auto; 
+    padding: 2rem;
 }
+
 .banner_container {
-  position: absolute;
   top: 8%;
   transform: translateX(-150rem);
   width: 80%;
@@ -131,8 +199,11 @@ body {
   display: flex;
   justify-content: center;
   animation: slidein 1s forwards;
+  z-index: 1;
 }
+
 .banner {
+  z-index: inherit;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -140,7 +211,6 @@ body {
   position: inherit;
   border-radius: 6rem 2rem 6rem 2rem;
   border: 2px solid rgb(0, 0, 0, 1);
-  opacity: 0;
 }
 
 .WarpBtn {
@@ -170,8 +240,9 @@ body {
   color: rgb(175, 130, 250);
   overflow: hidden;
 }
+
 .Clear,
-.Wish_close {
+.Wish_close , .skip, .Skip_wish{
   display: flex;
   position: absolute;
   top: 0.5rem;
@@ -184,7 +255,7 @@ body {
   border: 0;
   font: bold 30px Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   color: rgb(173, 129, 248);
-  z-index: 100;
+  z-index: 90;
   background-color: transparent;
   transition: 0.5s;
 }
@@ -192,6 +263,25 @@ body {
   border: 0;
   background-color: transparent;
   opacity: 20%;
+}
+
+.skip, .Skip_wish{
+  display: flex;
+  position: absolute;
+  top: 0.8rem;
+  right: 1rem;
+  width: 2rem;
+  height: auto;
+  align-items: center;
+  justify-content: center;
+  transition: 0.5s;
+  border: 0;
+  font: bold 30px Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  color: rgb(173, 129, 248);
+  z-index: 99;
+  background-color: transparent;
+  transition: 0.5s;
+  filter: invert(1);
 }
 .Warp1x:active,
 .Warp10x:active {
@@ -240,6 +330,7 @@ button:hover {
   from {
     transform: translateY(150rem);
   }
+
   to {
     transform: translateY(0);
   }

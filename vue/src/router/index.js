@@ -28,10 +28,15 @@ const router = createRouter({
       component: () => import('../views/character.vue')
     },
     {
+      path: '/character/:id',
+      name: 'charStat',
+      component: () => import('../views/charStats.vue')
+    },
+    {
       path: '/test',
       name: 'test',
       component: () => import('../views/testview.vue')
-    }
+    },
   ]
 })
 
