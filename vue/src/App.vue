@@ -1,39 +1,29 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import { onMounted, ref } from 'vue'
-import Account from './components/Account.vue'
-import Auth from './components/Auth.vue'
-import { supabase } from './supabase'
-const session = ref()
+import { onMounted } from 'vue'
+import { useAuthStore } from '../stores/auth.js' 
+
+const authStore = useAuthStore()
 
 onMounted(() => {
-  supabase.auth.getSession().then(({ data }) => {
-    session.value = data.session
-  })
-
-  supabase.auth.onAuthStateChange((_, _session) => {
-    session.value = _session
-  })
+  authStore.checkAuth()
 })
 </script>
 
 <template>
-  <div class="container" style="padding: 50px 0 100px 0">
+  <div>
+    <header>
+      <div class="wrapper">
+        <nav>
+          <RouterLink to="/">Home</RouterLink>
+          <RouterLink to="/about">About</RouterLink>
+          <RouterLink v-if="authStore.user" to="/test">Test</RouterLink>
+          <RouterLink v-if="!authStore.user" to="/exit">Exit</RouterLink>
+        </nav>
+      </div>
+    </header>
+
+    <RouterView />
   </div>
-  <header>
-
-    <div class="wrapper">
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/test">test</RouterLink>
-        <RouterLink to="/exit">exit</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
 </template>
 
 <style scoped>
