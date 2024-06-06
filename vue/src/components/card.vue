@@ -1,5 +1,5 @@
 <template>
-    <div class="card">
+    <router-link :to="charPage" class="card">
       <h1 class="name">{{ character.name }}</h1>
       <img
         :src="`../../public/Character_${character.img}_Splash_Art.webp`"
@@ -26,18 +26,25 @@
         />
         <p>Type: {{ character.type }}</p>
       </div>
-    </div>
+    </router-link>
   </template>
   
   <script setup>
+  import { computed } from 'vue';
   const props = defineProps({
     character: Object,
-  });
+  });  
+  const charPage = computed(() => {
+  return `/character/${props.character.name}`;
+});
   </script>
   
   <style scoped>
   @import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
-  
+h1, p{
+    color: white;
+  }
+
   body,
   html {
     box-sizing: border-box;

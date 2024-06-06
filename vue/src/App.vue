@@ -58,6 +58,7 @@ nav {
   z-index: 1;
   padding: 0;
   margin: 0;
+  background-color: transparent
 } 
 
 nav a.router-link-exact-active {

@@ -68,7 +68,7 @@ const character = [
         type: "Imaginary",
       },
       {
-        name: "Dr.Ratio",
+        name: "Dr. Ratio",
         img: "Dr._Ratio",
         rarity: "5",
         path: "The_Hunt",
@@ -96,7 +96,7 @@ const character = [
         type: "Fire",
       },
       {
-        name: "HuoHuo",
+        name: "Huohuo",
         img: "Huohuo",
         rarity: "5",
         path: "Abundance",
@@ -129,6 +129,13 @@ const character = [
         rarity: "5",
         path: "Abundance",
         type: "Imaginary",
+      },
+      {
+        name: "Robin",
+        img: "Robin",
+        rarity: "5",
+        path: "Harmony",
+        type: "Physical",
       },
       {
         name: "Ruan Mei",

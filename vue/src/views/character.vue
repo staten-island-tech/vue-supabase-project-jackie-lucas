@@ -4,7 +4,7 @@
     <div class="rarities">
       <div class="rarity" v-for="rarities in character" :key="rarities.rarity">
         <charCard
-          v-for="char in rarities.characters"
+          v-for="char in rarities.characters.sort()"
           :key="char.name"
           :character="char"
         />
