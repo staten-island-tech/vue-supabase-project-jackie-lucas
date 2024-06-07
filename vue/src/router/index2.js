@@ -5,14 +5,14 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: () => import('../views/HomeView.vue'),
+      path: '/signup',
+      name: 'signup',
+      component: () => import('../views/SignUp.vue'),
     },
     {
-      path: '/about',
-      name: 'about',
-      component: () => import('../views/AboutView.vue'),
+      path: '/login',
+      name: 'login',
+      component: () => import('../views/LogIn.vue'),
     },
     {
       path: '/test',
@@ -34,7 +34,7 @@ router.beforeEach((to, from, next) => {
   const authStore = useAuthStore(); // Get the Pinia store instance
   if (to.meta.requiresAuth && !authStore.isLoggedIn) {
     alert('Please log in first.');
-    next('/');
+    next('/login');
   } else {
     next();
   }
