@@ -8,7 +8,8 @@ const router = createRouter({
     {
       path: '/home',
       name: 'home',
-      component: HomeView
+      component: HomeView,
+      meta: { requiresAuth: true },
     },
     {
       path: '/signup',
@@ -19,12 +20,6 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: () => import('../views/LogIn.vue'),
-    },
-    {
-      path: '/exit',
-      name: 'exit',
-      component: () => import('../views/exitview.vue'),
-      meta: { requiresAuth: true },
     },
     {
       path: '/character',

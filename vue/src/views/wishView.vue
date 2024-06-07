@@ -1,4 +1,5 @@
 <template>
+  <nav><RouterLink to="/home" class="home"><img id="home" width="200rem" src="../../public/Icon_Home.png" alt="Home"></RouterLink></nav>
   <div class="container">
     <img class="Wish_bg" src="../../public/Wish_bg.avif" />
       <button class="clear" v-if="on" v-on:click="clear()">
@@ -19,7 +20,7 @@
       <source src="../../public/fourstarpulled.mp4" type="video/mp4" />
     </video>
 
-    <video class="warpVideo" v-if="threeStar" autoplay @ended="hideRoll" ref="video">
+    <video class="warpVideo" v-if="threeStar" autoplay @ended="hideRoll" ref="video" volume="1000">
       <source src="../../public/threestarpulled.mp4" type="video/mp4" />
     </video>
 
@@ -45,13 +46,15 @@ import rates from "@/components/character.js";
 import { character } from "@/components/character.js";
 import { ref } from "vue";
 import wishCard from "@/components/icon.vue";
+import { supabase } from '@/supabase';
 
 const on = ref(false);
 const fiveStar = ref(false);
 const fourStar = ref(false);
 const threeStar = ref(false);
 const wish_Char = ref([]);
-const wish_List = ref([]);
+const user = ref();
+
 const video = ref(null);
 function skipVideo(){
   video.value.currentTime = video.value.duration;
@@ -81,7 +84,7 @@ function random_Rarity(rate) {
 function char_Rarity(times) {
   iteration(times)
 }
-function iteration(times) {
+async function iteration(times) {
   wish_Char.value = [];
   for (let i = 0; i < times; i++) {
     let rarity = random_Rarity(rates);
@@ -90,7 +93,6 @@ function iteration(times) {
     );
     let random_Character = character[rarity].characters[random_Character_Index];
     wish_Char.value.push(random_Character);
-    wish_List.value.push(random_Character);
   }
   if (wish_Char.value.some(wishedChar => wishedChar.rarity == 5)) {
   fiveStar.value = true;
@@ -105,9 +107,41 @@ function iteration(times) {
   const threeStarChar = wish_Char.value.find(char => char.rarity == 3);
   console.log(threeStar.value, "three", threeStarChar.name);
 }
-
-
+const { data, error } = await supabase.auth.getUser();
+  if (error) {
+    console.error('Error fetching user IDs:', error);
+  } else {
+    user.value = data.user.id;
+    console.log(user.value, "id")
+    await supabaseLevel(wish_Char.value);
+  }
 }
+
+async function supabaseLevel(char_List) {
+  const { data, error } = await supabase
+    .from('profiles')
+    .select()
+    .eq('id', user.value).single();
+    console.log(data,"more")
+  console.log(wish_Char.value, "list")
+  char_List.forEach(async (character) => {
+    const char_Name = character.name;
+  console.log(char_Name)
+  const newValue = data[char_Name] + 1;
+  console.log(newValue,"new")
+  const { data: updatedData, error: updateError } = await supabase
+      .from('profiles')
+      .update({ [char_Name]: newValue })
+      .eq('id', user.value)
+      .single();
+
+    if (updateError) {
+      console.error('Error updating data:', updateError);
+    } else {
+      console.log(`Updated ${char_Name} to ${newValue}`);
+    }
+})}
+
 
 function display_Char(values) {
   return Math.floor(Math.random() * values);
@@ -117,6 +151,7 @@ function clear() {
   on.value = false;
   wish_Char.value = [];
 }
+
 </script>
 
 <style scoped>
@@ -133,7 +168,17 @@ body {
   overflow: hidden;
   box-sizing: border-box;
 }
-
+a{
+  background-color: transparent;
+}
+.home {
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+  z-index: 2;
+  padding: 0;
+  margin: 0;
+}
 .container {
   position: absolute;
   top: 0;
@@ -162,11 +207,11 @@ body {
   object-fit: cover;
   filter: blur(5px);
   animation: fadeIn 3s;
-  z-index: -1;
+  z-index: 1;
 }
 
 .vignette {
-  z-index: 1;
+  z-index: 3;
   display: flex;
   flex-wrap: wrap;
   position: absolute;
@@ -185,7 +230,7 @@ body {
     width: 120%;
     height: 80%; 
     overflow: hidden;
-    z-index: 1;
+    z-index: 3;
     position: absolute;
     margin: auto; 
     padding: 2rem;
@@ -199,7 +244,7 @@ body {
   display: flex;
   justify-content: center;
   animation: slidein 1s forwards;
-  z-index: 1;
+  z-index: 2;
 }
 
 .banner {
@@ -221,7 +266,7 @@ body {
   width: 35%;
   gap: 1rem;
   animation: slideup 1s forwards, float 10s 1s infinite;
-  z-index: 3;
+  z-index: 4;
 }
 
 .Warp1x,
@@ -239,6 +284,7 @@ body {
   font: bold 30px Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   color: rgb(175, 130, 250);
   overflow: hidden;
+  z-index: inherit;
 }
 
 .Clear,
