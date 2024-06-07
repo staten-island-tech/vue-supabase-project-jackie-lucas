@@ -20,7 +20,7 @@
       <source src="../../public/fourstarpulled.mp4" type="video/mp4" />
     </video>
 
-    <video class="warpVideo" v-if="threeStar" autoplay @ended="hideRoll" ref="video">
+    <video class="warpVideo" v-if="threeStar" autoplay @ended="hideRoll" ref="video" volume="1000">
       <source src="../../public/threestarpulled.mp4" type="video/mp4" />
     </video>
 
