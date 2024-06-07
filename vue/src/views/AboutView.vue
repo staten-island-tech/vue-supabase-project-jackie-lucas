@@ -1,12 +1,12 @@
 <script setup>
 import { ref, watch } from "vue";
+import { useAuthStore } from '@/stores/auth.js';
+import { supabase } from '@/supabase.js'
 const Uemail = ref("");
 const Upassword = ref("");
-
-import { supabase } from '@/supabase.js'
+const authStore = useAuthStore();
 
 async function signInWithEmail() {
-  const logged = false
   const useremail= Uemail.value;
   const userpassword= Upassword.value;
   console.log(useremail, userpassword);
@@ -18,6 +18,7 @@ async function signInWithEmail() {
       alert('Incorrect Login Credentials')
   } else {
     alert("Sign In completed.")
+    authStore.login();
   }
 
 
