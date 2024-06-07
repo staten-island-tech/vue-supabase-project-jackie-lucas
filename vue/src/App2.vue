@@ -11,7 +11,7 @@ const videoRef = ref(null);
 const route = useRoute();
 
 watch(route, (newRoute) => {
-  if (newRoute.path !== '/') {
+  if (newRoute.path !== '') {
     videoplay.value = false;
     if (videoRef.value) {
       videoRef.value.pause();
@@ -28,11 +28,11 @@ watch(route, (newRoute) => {
 <template>
   <div class="container">
     <video class="video" autoplay muted loop>
-      <source src="../public/train.mp4" type="video/mp4" />
+      <source v-if="videoplay" src="../public/train.mp4" type="video/mp4" />
     </video>
     <nav>
       <div class="routers">
-        <RouterLink to="/signup">Signup</RouterLink>
+        <RouterLink to="/signup">Sign Up</RouterLink>
         <RouterLink to="/login">Login</RouterLink>
       </div>
     </nav>
@@ -58,7 +58,7 @@ watch(route, (newRoute) => {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: 0;
+  z-index: -1;
 }
 .signoutbutton {
   position: absolute;

@@ -119,18 +119,24 @@ p{
     align-items: center;
     text-align: center;
     position: absolute;
-    left: 38%;
-    padding: 20px;
+    left: 10%;
+    top: 10%;
+    gap: 5rem;
+    width: auto;
     border-radius: 10px;
     z-index: 1;
     animation: slideRight 1s ease-in-out forwards;
 }
 .cdataContainer{
     display: flex;
+    position: absolute;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     z-index: 1;
     animation: slideRight 1s ease-in-out 0.5s forwards;
+    top: 20%;
+    left: 1%;
 }
 .cdataImg{
     position: absolute;
@@ -144,7 +150,8 @@ p{
 }
 .cdataType,
 .cdataPath {
-    width: 5%;
+    width: 50%;
+    left: 10%;
 }
 .cdataStats{
     display: flex;
