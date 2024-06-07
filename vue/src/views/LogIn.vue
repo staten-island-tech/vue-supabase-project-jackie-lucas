@@ -1,5 +1,6 @@
 <script setup>
 import { ref, watch } from "vue";
+import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/auth.js';
 import { supabase } from '@/supabase.js'
 const Uemail = ref("");
@@ -13,36 +14,28 @@ async function signInWithEmail() {
   const { data, error } = await supabase.auth.signInWithPassword({
     email: useremail,
     password: userpassword,
-    options: {
-      emailRedirectTo: 'http://localhost:5173/home',
-    },
   })
   if (error) {
       alert('Incorrect Login Credentials')
   } else {
     alert("Sign In completed.")
     authStore.login();
+    router.push('/home');
   }
-
-
 }
 </script>
 
 
 <template>
-  <form class="signupform">
-  <input v-model="Uemail" type="input" />
-  <br>
-  <input v-model="Upassword" type="input" />
-  <br>
-  <button v-on:click="signInWithEmail()">Sign In</button>
+  <form class="signupform" @submit.prevent="signInWithEmail">
+    <input v-model="Uemail" type="email" placeholder="Email" />
+    <br>
+    <input v-model="Upassword" type="password" placeholder="Password" />
+    <br>
+    <button type="submit">Sign In</button>
   </form>
 </template>
 
+
 <style scoped>
-.signupform{
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-}
 </style>
