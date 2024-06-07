@@ -1,4 +1,5 @@
 <template>
+  <nav><RouterLink to="/home" class="home"><img id="home" width="200rem" src="../../public/Icon_Home.png" alt="Home"></RouterLink></nav>
   <div class="container">
     <img class="Wish_bg" src="../../public/Wish_bg.avif" />
       <button class="clear" v-if="on" v-on:click="clear()">
@@ -133,7 +134,14 @@ body {
   overflow: hidden;
   box-sizing: border-box;
 }
-
+.home {
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+  z-index: 99;
+  padding: 0;
+  margin: 0;
+}
 .container {
   position: absolute;
   top: 0;
