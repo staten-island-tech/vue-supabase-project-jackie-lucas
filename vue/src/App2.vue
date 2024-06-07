@@ -28,7 +28,7 @@ watch(route, (newRoute) => {
 <template>
   <div class="container">
     <video class="video" autoplay muted loop>
-      <source src="../../public/train.mp4" type="video/mp4" />
+      <source src="../public/train.mp4" type="video/mp4" />
     </video>
     <nav>
       <div class="routers">
