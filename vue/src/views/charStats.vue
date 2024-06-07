@@ -4,13 +4,13 @@
     <div class="charInfo">
         <h1 class="cdataName">{{ cdata.name }}</h1>
         <h1 class="cdataLevel">Level {{ level }}</h1>
-        <img class="cdataRarity" :src="`../../public/${cdata.rarity}.webp`" :alt="`${cdata.rarity} Stars`" />
+        <img class="cdataRarity" :src="`../${cdata.rarity}.webp`" :alt="`${cdata.rarity} Stars`" />
         <div class="cdataContainer">
-            <img class="cdataType" :src="`../../public/Type_${cdata.type}.webp`" :alt="`${cdata.type}`" />
-            <img class="cdataPath" :src="`../../public/Path_${cdata.path}.webp`" :alt="`${cdata.path}`" />
+            <img class="cdataType" :src="`../Type_${cdata.type}.webp`" :alt="`${cdata.type}`" />
+            <img class="cdataPath" :src="`../Path_${cdata.path}.webp`" :alt="`${cdata.path}`" />
         </div>
     </div>
-    <img class="cdataImg" :src="`../../public/Character_${cdata.img}_Splash_Art.webp`" :alt="`${character.name} Splash Art`" />
+    <img class="cdataImg" :src="`../Character_${cdata.img}_Splash_Art.webp`" :alt="`${character.name} Splash Art`" />
     <div class="cdataStats">
         <p class="charHP"> HP: {{ charStat.HP }}</p>
         <p class="charATK"> ATK: {{ charStat.ATK }}</p>
