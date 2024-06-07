@@ -1,20 +1,19 @@
 <template>
     <router-link :to="charPage" class="card">
       <h1 class="name">{{ character.name }}</h1>
-      <h1 class="name">{{ level }}</h1>
       <img
-        :src="`../Character_${character.img}_Splash_Art.webp`"
+        :src="`../../public/Character_${character.img}_Splash_Art.webp`"
         :alt="`${character.name} Splash Art`"
       />
       <img
         class="rarity"
-        :src="`../${character.rarity}.webp`"
+        :src="`../../public/${character.rarity}.webp`"
         :alt="`${character.rarity} Stars`"
       />
       <div class="path_container">
         <img
           class="path"
-          :src="`../Path_${character.path}.webp`"
+          :src="`../../public/Path_${character.path}.webp`"
           :alt="`${character.path}`"
         />
         <p>Path: {{ character.path }}</p>
@@ -22,7 +21,7 @@
       <div class="type_container">
         <img
           class="type"
-          :src="`../Type_${character.type}.webp`"
+          :src="`../../public/Type_${character.type}.webp`"
           :alt="`${character.type}`"
         />
         <p>Type: {{ character.type }}</p>
@@ -31,29 +30,13 @@
   </template>
   
   <script setup>
-  import { supabase } from '@/supabase';
   import { computed } from 'vue';
-  import { onMounted, ref } from 'vue';
-
-  const level = ref() 
   const props = defineProps({
     character: Object,
   });  
   const charPage = computed(() => {
   return `/character/${props.character.name}`;
 });
-
-onMounted(async() => {
-    getCharData()
-    const { data, error } = await supabase.auth.getUser();
-  if (error) {
-    console.error('Error fetching user IDs:', error);
-  } else {
-    user.value = data.user.id;
-    console.log(user.value, "id")
-    await supabaseLevel(charName.value);
-  }
-})
   </script>
   
   <style scoped>

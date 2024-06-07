@@ -3,24 +3,24 @@
       <p class="wish_name">{{ wish.name }}</p>
       <img
         class="wish_img"
-        :src="`../Character_${wish.img}_icon.webp`"
+        :src="`../../public/Character_${wish.img}_icon.webp`"
         :alt="`${wish.name}`"
       />
       
       <img
         class="wish_rarity"
-        :src="`../${wish.rarity}.webp`"
+        :src="`../../public/${wish.rarity}.webp`"
         :alt="`${wish.rarity} Stars`"
       />
       <div class="wish_container">
 <img
           class="wish_type"
-          :src="`../Type_${wish.type}.webp`"
+          :src="`../../public/Type_${wish.type}.webp`"
           :alt="`${wish.type}`"
         />
         <img
           class="wish_path"
-          :src="`../Path_${wish.path}.webp`"
+          :src="`../../public/Path_${wish.path}.webp`"
           :alt="`${wish.path}`"
         />
         
