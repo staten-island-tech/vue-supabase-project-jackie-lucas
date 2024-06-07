@@ -37,7 +37,7 @@ nav {
   position: absolute;
   left: 0;
   top: 0.5rem;
-  z-index: 99;
+  z-index: 0;
   padding: 0;
   margin: 0;
   display: flex;
@@ -51,7 +51,7 @@ nav {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    z-index: 0;
+    z-index: -1;
   }
   .signoutbutton{
     position: absolute;

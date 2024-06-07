@@ -32,7 +32,7 @@ watch(route, (newRoute) => {
     </video>
     <nav>
       <div class="routers">
-        <RouterLink to="/signup">Sign Up</RouterLink>
+        <RouterLink to="/signup">Signup</RouterLink>
         <RouterLink to="/login">Login</RouterLink>
       </div>
     </nav>
@@ -48,7 +48,7 @@ watch(route, (newRoute) => {
   align-items: center;
   height: 100vh;
   width: 100%;
-  z-index: -1;
+  z-index: 0;
   background-color: black;
 }
 .video {
