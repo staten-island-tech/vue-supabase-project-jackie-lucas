@@ -3,20 +3,29 @@
       <nav><RouterLink to="/home" class="home"><img id="home" width="200rem" src="../../public/Icon_Home.png" alt="Home"></RouterLink></nav>
     <div class="charInfo">
         <h1 class="cdataName">{{ cdata.name }}</h1>
+<<<<<<< Updated upstream
         <h1 class="cdataLevel">Level {{ level }}</h1>
         <img class="cdataRarity" :src="`../../public/${cdata.rarity}.webp`" :alt="`${cdata.rarity} Stars`" />
+=======
+        <img class="cdataRarity" :src="`../${cdata.rarity}.webp`" :alt="`${cdata.rarity} Stars`" />
+        <h1 class="cdataLevel">Level {{ level }}</h1>
+>>>>>>> Stashed changes
         <div class="cdataContainer">
             <img class="cdataType" :src="`../../public/Type_${cdata.type}.webp`" :alt="`${cdata.type}`" />
             <img class="cdataPath" :src="`../../public/Path_${cdata.path}.webp`" :alt="`${cdata.path}`" />
         </div>
     </div>
+<<<<<<< Updated upstream
     <img class="cdataImg" :src="`../../public/Character_${cdata.img}_Splash_Art.webp`" :alt="`${character.name} Splash Art`" />
+=======
+>>>>>>> Stashed changes
     <div class="cdataStats">
         <p class="charHP"> HP: {{ charStat.HP }}</p>
         <p class="charATK"> ATK: {{ charStat.ATK }}</p>
         <p class="charDEF"> DEF: {{ charStat.DEF }}</p>
         <p class="charSPD"> SPD: {{ charStat.SPD }}</p>
     </div>
+    <img class="cdataImg" :src="`../Character_${cdata.img}_Splash_Art.webp`" :alt="`${character.name} Splash Art`" />
 </template>
 
 <script setup>
@@ -55,7 +64,7 @@ async function supabaseLevel(name) {
   console.log(name, "char")
   level.value = data[name] 
   console.log(level.value,"new")
-}
+}   
 onMounted(async() => {
     getCharData()
     const { data, error } = await supabase.auth.getUser();
@@ -100,15 +109,13 @@ body {
 p{
     font: bold 100% "Lato", sans-serif;
     display: inline-block;
-    font-size: 20px
+    font-size: 30px;
 }
 .charInfo,
 .cdataContainer,
 .cdataImg,
-.cdataStats {
-    position: absolute;
-    top: 50%;
-    left: 50%;
+.cdataStats,
+.cardContainer {
     visibility: hidden;
 }
 
@@ -119,8 +126,15 @@ p{
     align-items: center;
     text-align: center;
     position: absolute;
+<<<<<<< Updated upstream
     left: 38%;
     padding: 20px;
+=======
+    left: 10%;
+    top: 15%;
+    gap: 3rem;
+    width: auto;
+>>>>>>> Stashed changes
     border-radius: 10px;
     z-index: 1;
     animation: slideRight 1s ease-in-out forwards;
@@ -131,6 +145,11 @@ p{
     align-items: center;
     z-index: 1;
     animation: slideRight 1s ease-in-out 0.5s forwards;
+<<<<<<< Updated upstream
+=======
+    top: 20%;
+    left: 5%;
+>>>>>>> Stashed changes
 }
 .cdataImg{
     position: absolute;
@@ -153,6 +172,7 @@ p{
     z-index: 1;
     position: absolute;
     left: 10%;
+    top: 50%;
     gap: 1rem;
 }
 .charHP{
