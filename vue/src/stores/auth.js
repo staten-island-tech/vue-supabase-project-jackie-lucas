@@ -1,8 +1,6 @@
-// auth.js
-
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { supabase } from '@/supabase'
+import { supabase } from '@/supabase.js'
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
@@ -12,12 +10,14 @@ export const useAuthStore = defineStore('auth', {
 
   actions: {
     async checkAuth() {
-      const session = supabase.auth.session()
+      const session = supabase.auth.session();
       if (session) {
-        this.user = session.user
+        this.user = session.user;
       }
-      this.loading = false
+      this.loading = false;
     },
+    
+    
 
     async signIn(email, password) {
       const { error } = await supabase.auth.signIn({ email, password })
