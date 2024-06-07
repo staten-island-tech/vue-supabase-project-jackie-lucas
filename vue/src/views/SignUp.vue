@@ -28,11 +28,63 @@ import { supabase } from '@/supabase.js'
 
 
 <template>
-  <input v-model="Nemail" type="input" />
-  <br>
-  <input v-model="Npassword" type="input" />
-  <br>
-  <p>Please note password must be at least 6 characters</p>
-  <br>
-  <button v-on:click="signUpNewUser();">Sign Up</button>
+  <form class="signupform" @submit.prevent="signUpNewUser">
+    <input id="email" v-model="Nemail" type="email" required placeholder="Email"/>
+    <br>
+    <input id="password" v-model="Npassword" type="password" required placeholder="Password" minlength="6" />
+    <br>
+    <p class="note">Please note password must be at least 6 characters</p>
+    <br>
+    <button type="submit" class="signup-button">Sign Up</button>
+  </form>
 </template>
+
+<style scoped>
+.signupform {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  height: 40%;
+  padding: 10px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.signupform input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+.signupform .note {
+  color: #555;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.signupform .signup-button {
+  width: 100%;
+  padding: 10px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.signupform .signup-button:hover {
+  background: #0056b3;
+}
+</style>
