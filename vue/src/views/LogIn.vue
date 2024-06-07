@@ -13,6 +13,9 @@ async function signInWithEmail() {
   const { data, error } = await supabase.auth.signInWithPassword({
     email: useremail,
     password: userpassword,
+    options: {
+      emailRedirectTo: 'http://localhost:5173/home',
+    },
   })
   if (error) {
       alert('Incorrect Login Credentials')
@@ -27,9 +30,19 @@ async function signInWithEmail() {
 
 
 <template>
+  <form class="signupform">
   <input v-model="Uemail" type="input" />
   <br>
   <input v-model="Upassword" type="input" />
   <br>
   <button v-on:click="signInWithEmail()">Sign In</button>
+  </form>
 </template>
+
+<style scoped>
+.signupform{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+</style>

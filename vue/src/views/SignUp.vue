@@ -15,7 +15,7 @@ import { supabase } from '@/supabase.js'
     email: newemail,
     password: newpassword,
     options: {
-      emailRedirectTo: 'http://localhost:5173/about',
+      emailRedirectTo: 'http://localhost:5173/login',
     },
   })
   if (error) {

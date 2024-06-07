@@ -1,9 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import HomeView from '../views/homeView.vue'
 import { useAuthStore } from '@/stores/auth.js'; // Import the store
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    {
+      path: '/home',
+      name: 'home',
+      component: HomeView
+    },
     {
       path: '/signup',
       name: 'signup',
@@ -15,21 +21,9 @@ const router = createRouter({
       component: () => import('../views/LogIn.vue'),
     },
     {
-      path: '/test',
-      name: 'test',
-      component: () => import('../views/testview.vue'),
-      meta: { requiresAuth: true },
-    },
-    {
       path: '/exit',
       name: 'exit',
       component: () => import('../views/exitview.vue'),
-      meta: { requiresAuth: true },
-    },
-    {
-      path: '/wish',
-      name: 'wish',
-      component: () => import('../views/wishView.vue'),
       meta: { requiresAuth: true },
     },
     {
@@ -42,6 +36,12 @@ const router = createRouter({
       path: '/character/:id',
       name: 'charStat',
       component: () => import('../views/charStats.vue'),
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/wish',
+      name: 'wish',
+      component: () => import('../views/wishView.vue'),
       meta: { requiresAuth: true },
     },
   ],

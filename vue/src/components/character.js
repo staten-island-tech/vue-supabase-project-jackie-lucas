@@ -47,6 +47,13 @@ const character = [
         type: "Wind",
       },
       {
+        name: "Boothill",
+        img: "Boothill",
+        rarity: "5",
+        path: "The_Hunt",
+        type: "Physical",
+      },
+      {
         name: "Bronya",
         img: "Bronya",
         rarity: "5",
