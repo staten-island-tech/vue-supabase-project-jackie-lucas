@@ -1,5 +1,8 @@
 <template>
   <div class="black"></div>
+  <nav>
+  <RouterLink to="/home" class="home"><img id="home" width="200rem" src="../../public/Icon_Home.png" alt="Home"></RouterLink>
+</nav>
     <img
       class="Character_bg" src="../../public/Wallpaper_Ingenium_Dreams.webp" alt="Wallpaper Ingenium Dreams"/>
     <div class="rarities">
@@ -28,6 +31,14 @@
     z-index: 0;
     background-color: #181818;
   }
+  .home {
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+  z-index: 99;
+  padding: 0;
+  margin: 0;
+}
   .Character_bg {
     opacity: 0.2;
     width: 100%;

@@ -47,7 +47,6 @@ import { character } from "@/components/character.js";
 import { ref } from "vue";
 import wishCard from "@/components/icon.vue";
 
-videoplay.value = ref(false);
 const on = ref(false);
 const fiveStar = ref(false);
 const fourStar = ref(false);
@@ -135,11 +134,14 @@ body {
   overflow: hidden;
   box-sizing: border-box;
 }
+a{
+  background-color: transparent;
+}
 .home {
   position: absolute;
   left: 0;
   top: 0.5rem;
-  z-index: 99;
+  z-index: 2;
   padding: 0;
   margin: 0;
 }
@@ -171,11 +173,11 @@ body {
   object-fit: cover;
   filter: blur(5px);
   animation: fadeIn 3s;
-  z-index: -1;
+  z-index: 1;
 }
 
 .vignette {
-  z-index: 1;
+  z-index: 3;
   display: flex;
   flex-wrap: wrap;
   position: absolute;
@@ -194,7 +196,7 @@ body {
     width: 120%;
     height: 80%; 
     overflow: hidden;
-    z-index: 1;
+    z-index: 3;
     position: absolute;
     margin: auto; 
     padding: 2rem;
@@ -208,7 +210,7 @@ body {
   display: flex;
   justify-content: center;
   animation: slidein 1s forwards;
-  z-index: 1;
+  z-index: 2;
 }
 
 .banner {
@@ -230,7 +232,7 @@ body {
   width: 35%;
   gap: 1rem;
   animation: slideup 1s forwards, float 10s 1s infinite;
-  z-index: 3;
+  z-index: 4;
 }
 
 .Warp1x,
@@ -248,6 +250,7 @@ body {
   font: bold 30px Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   color: rgb(175, 130, 250);
   overflow: hidden;
+  z-index: inherit;
 }
 
 .Clear,
