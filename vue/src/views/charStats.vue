@@ -11,10 +11,10 @@
     </div>
     <img class="cdataImg" :src="`../../public/Character_${cdata.img}_Splash_Art.webp`" :alt="`${character.name} Splash Art`" />
     <div class="cdataStats">
-        <p class="charHP"> HP {{ charStat.HP }}</p>
-        <p class="charATK"> ATK {{ charStat.ATK }}</p>
-        <p class="charDEF"> DEF{{ charStat.DEF }}</p>
-        <p class="charSPD"> SPD {{ charStat.SPD }}</p>
+        <p class="charHP"> HP: {{ charStat.HP }}</p>
+        <p class="charATK"> ATK: {{ charStat.ATK }}</p>
+        <p class="charDEF"> DEF: {{ charStat.DEF }}</p>
+        <p class="charSPD"> SPD: {{ charStat.SPD }}</p>
     </div>
 </template>
 
@@ -78,7 +78,7 @@ body {
 p{
     font: bold 100% "Lato", sans-serif;
     display: inline-block;
-    font-size: 16px
+    font-size: 20px
 }
 .charInfo,
 .cdataContainer,
@@ -97,6 +97,7 @@ p{
     align-items: center;
     text-align: center;
     position: absolute;
+    left: 38%;
     padding: 20px;
     border-radius: 10px;
     z-index: 1;
