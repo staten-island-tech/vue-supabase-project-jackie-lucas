@@ -1,29 +1,38 @@
-<template>
-  <div>
-    <form @submit.prevent>
-    <input ref="user" type="text" placeholder="Username" required/>
-    <input ref="pass" type="password" placeholder="Password" required/>
-    <button @click="signUpNewUser" type="submit" >Sign Up</button>
-  </form>
-  </div>
-</template>
-
 <script setup>
-import { onMounted } from 'vue';
-import { supabase } from '@/supabase';
-import { ref } from 'vue';
-async function signUpNewUser() { 
-  const user = ref()
-  const pass = ref()
-  const { data, error } = await supabase.auth.signUp({
-  email: user,
-  password: pass,
-})
-console.log("hi", data)
-}
+import { ref, watch } from "vue";
+const Nemail = ref("");
+const Npassword = ref("");
+const perms = false
 
+import { supabase } from '@/supabase.js'
+
+  async function signUpNewUser() {
+  const newemail= Nemail.value;
+  const newpassword= Npassword.value;  
+  const perms = true
+  console.log(newemail, newpassword)
+  const { data, error } = await supabase.auth.signUp({
+    email: newemail,
+    password: newpassword,
+    options: {
+      emailRedirectTo: 'http://localhost:5173/about',
+    },
+  })
+  if (error) {
+    alert("There was an error when creating your account.")
+  } else {
+    alert("Sign Up completed, please Sign In")
+  }
+}
 </script>
 
-<style lang="scss" scoped>
 
-</style>
+<template>
+  <input v-model="Nemail" type="input" />
+  <br>
+  <input v-model="Npassword" type="input" />
+  <br>
+  <p>Please note password must be at least 6 characters</p>
+  <br>
+  <button v-on:click="signUpNewUser();">Sign Up</button>
+</template>
