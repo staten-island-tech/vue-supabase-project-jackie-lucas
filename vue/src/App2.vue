@@ -25,10 +25,11 @@ onMounted(() => {
     <div class="wrapper">
 
       <nav>
-        <RouterLink to="/signup">SignUp</RouterLink>
-        <RouterLink to="/login">LogIn</RouterLink>
-        <RouterLink to="/test">test</RouterLink>
-        <RouterLink to="/exit">exit</RouterLink>
+        <RouterLink to="/signup">Sign Up</RouterLink>
+        <RouterLink to="/login">Log In</RouterLink>
+        <RouterLink to="/character">Characters</RouterLink>
+        <RouterLink to="/wish">Wish</RouterLink>
+        <RouterLink to="/exit">Sign Out</RouterLink>
       </nav>
     </div>
   </header>

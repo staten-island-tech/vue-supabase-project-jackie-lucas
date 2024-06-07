@@ -26,6 +26,24 @@ const router = createRouter({
       component: () => import('../views/exitview.vue'),
       meta: { requiresAuth: true },
     },
+    {
+      path: '/wish',
+      name: 'wish',
+      component: () => import('../views/wishView.vue'),
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/character',
+      name: 'character',
+      component: () => import('../views/character.vue'),
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/character/:id',
+      name: 'charStat',
+      component: () => import('../views/charStats.vue'),
+      meta: { requiresAuth: true },
+    },
   ],
 });
 
