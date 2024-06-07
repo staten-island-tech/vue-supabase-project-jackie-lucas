@@ -1,8 +1,8 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
+import { useAuthStore } from '@/stores/auth.js'
 import { supabase } from '@/supabase.js'
-import { useAuthStore } from '@/stores/auth.js';
 
     const authStore = useAuthStore();
 
@@ -24,11 +24,12 @@ onMounted(() => {
     session.value = _session
   })
 }) */
+const videoplay = ref(true);
 </script>
 
 <template>
-      <video class="video" autoplay muted loop>
-      <source class="video" src="../../public/train.mp4" type="video/mp4" />
+      <video class="video" v-if="videoplay" autoplay muted loop>
+      <source class="video" v-if="videoplay" src="../../public/train.mp4" type="video/mp4" />
     </video>
     <div class="container">
       <nav>

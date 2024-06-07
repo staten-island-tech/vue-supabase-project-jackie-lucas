@@ -47,6 +47,7 @@ import { character } from "@/components/character.js";
 import { ref } from "vue";
 import wishCard from "@/components/icon.vue";
 
+videoplay.value = ref(false);
 const on = ref(false);
 const fiveStar = ref(false);
 const fourStar = ref(false);
