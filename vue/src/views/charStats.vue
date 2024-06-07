@@ -1,4 +1,6 @@
 <template>
+      <div class="black"></div>
+      <nav><RouterLink to="/home" class="home"><img id="home" width="200rem" src="../../public/Icon_Home.png" alt="Home"></RouterLink></nav>
     <div class="charInfo">
         <h1 class="cdataName">{{ cdata.name }}</h1>
         <img class="cdataRarity" :src="`../../public/${cdata.rarity}.webp`" :alt="`${cdata.rarity} Stars`" />
@@ -21,6 +23,7 @@ import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router';
 import { character } from '@/components/character';
 import { supabase } from '@/supabase';
+import { RouterLink, RouterView } from 'vue-router'
 
 const cdata = ref({})
 const charStat = ref([])
@@ -55,6 +58,23 @@ body {
     box-sizing: border-box;
     top: 0;
 }
+.home {
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+  z-index: 99;
+  padding: 0;
+  margin: 0;
+}
+.black{
+    position: absolute;
+    width: 100%;
+    height:100%;
+    left:0;
+    top: 0;
+    z-index: 0;
+    background-color: #181818;
+  }
 p{
     font: bold 100% "Lato", sans-serif;
     display: inline-block;

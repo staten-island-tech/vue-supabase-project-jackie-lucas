@@ -21,12 +21,6 @@ const router = createRouter({
       component: () => import('../views/LogIn.vue'),
     },
     {
-      path: '/exit',
-      name: 'exit',
-      component: () => import('../views/exitview.vue'),
-      meta: { requiresAuth: true },
-    },
-    {
       path: '/character',
       name: 'character',
       component: () => import('../views/character.vue'),

@@ -2,7 +2,7 @@
 import { RouterLink, RouterView } from 'vue-router'
 import { onMounted, ref } from 'vue'
 import { supabase } from '@/supabase.js'
-    import { useAuthStore } from '@/stores/auth.js';
+import { useAuthStore } from '@/stores/auth.js';
 
     const authStore = useAuthStore();
 
@@ -35,7 +35,6 @@ onMounted(() => {
         <div class="routers">
         <RouterLink to="/signup">Sign Up</RouterLink>
         <RouterLink to="/login">Login</RouterLink>
-        <RouterLink to="/exit">Sign Out</RouterLink>
       </div>
       </nav>
     </div>
@@ -44,13 +43,13 @@ onMounted(() => {
 
 <style scoped>
 .container {
+  position: relative; /* Ensure container acts as positioning context */
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   width: 100%;
-  position: relative;
-  z-index: 0;
+  z-index: 0; /* Ensure container is at the bottom of stacking order */
 }
   .video {
     position: absolute;
@@ -59,7 +58,7 @@ onMounted(() => {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    z-index: -2;
+    z-index: -10000000;
   }
 .signoutbutton{
   position: absolute;
@@ -73,14 +72,15 @@ onMounted(() => {
 }
 
 .routers {
-  position: absolute;
   display: flex;
-  flex-direction: row;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  position: absolute  ;
   top: 20%;
+  left: 50%;
   transform: translate(-50%, -50%);
   width: auto;
+  height: auto;
   font-size: 30px;
   text-align: center;
   background-color: white;

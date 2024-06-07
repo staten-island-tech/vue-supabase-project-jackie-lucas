@@ -1,10 +1,14 @@
 <script setup>
 import { ref, watch } from "vue";
+import { useRouter } from 'vue-router';
+import { supabase } from '@/supabase.js'
+
 const Nemail = ref("");
 const Npassword = ref("");
 const perms = false
+const router = useRouter();
 
-import { supabase } from '@/supabase.js'
+
 
   async function signUpNewUser() {
   const newemail= Nemail.value;
@@ -14,14 +18,12 @@ import { supabase } from '@/supabase.js'
   const { data, error } = await supabase.auth.signUp({
     email: newemail,
     password: newpassword,
-    options: {
-      emailRedirectTo: 'http://localhost:5173/login',
-    },
   })
   if (error) {
     alert("There was an error when creating your account.")
   } else {
     alert("Sign Up completed, please Sign In")
+    router.push('/login');
   }
 }
 </script>
