@@ -1,9 +1,9 @@
 <template>
   <div class="container">
     <img class="Wish_bg" src="../../public/Wish_bg.avif" />
-    <button class="clear" v-if="on" v-on:click="clear()">
-      <img class="Wish_close" v-if="on" src="../../public/Icon_Close.png" />
-    </button>
+      <button class="clear" v-if="on" v-on:click="clear()">
+        <img class="Wish_close" v-if="on" src="../../public/Icon_Close.png" />
+      </button>
     <div class="WarpBtn">
       <button class="Warp1x" v-on:click="char_Rarity(1)">Warp 1×</button>
       <button class="Warp10x" v-on:click="char_Rarity(10)">Warp 10×</button>
