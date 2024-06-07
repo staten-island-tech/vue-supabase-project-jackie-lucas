@@ -46,13 +46,15 @@ import rates from "@/components/character.js";
 import { character } from "@/components/character.js";
 import { ref } from "vue";
 import wishCard from "@/components/icon.vue";
+import { supabase } from '@/supabase';
 
 const on = ref(false);
 const fiveStar = ref(false);
 const fourStar = ref(false);
 const threeStar = ref(false);
 const wish_Char = ref([]);
-const wish_List = ref([]);
+const user = ref();
+
 const video = ref(null);
 function skipVideo(){
   video.value.currentTime = video.value.duration;
@@ -82,7 +84,7 @@ function random_Rarity(rate) {
 function char_Rarity(times) {
   iteration(times)
 }
-function iteration(times) {
+async function iteration(times) {
   wish_Char.value = [];
   for (let i = 0; i < times; i++) {
     let rarity = random_Rarity(rates);
@@ -91,7 +93,6 @@ function iteration(times) {
     );
     let random_Character = character[rarity].characters[random_Character_Index];
     wish_Char.value.push(random_Character);
-    wish_List.value.push(random_Character);
   }
   if (wish_Char.value.some(wishedChar => wishedChar.rarity == 5)) {
   fiveStar.value = true;
@@ -106,9 +107,32 @@ function iteration(times) {
   const threeStarChar = wish_Char.value.find(char => char.rarity == 3);
   console.log(threeStar.value, "three", threeStarChar.name);
 }
-
-console.log(wish_List)
+const { data, error } = await supabase.auth.getUser();
+  if (error) {
+    console.error('Error fetching user IDs:', error);
+  } else {
+    user.value = data.user.id;
+    console.log(user.value, "id")
+  }
+  await supabaseLevel(wish_Char.value);
 }
+async function supabaseLevel(char_List) {
+  for (const name of char_List) {
+    const { data, error } = await supabase
+      .from('profiles')
+      .update({ count: supabase.sql`count + 1` })
+      .eq('name', user.value)
+      .eq('characterName', name)
+      .single();
+      
+    if (error) {
+      console.error(`Error updating character count for ${name}:`, error.message);
+    } else {
+      console.log(`Incremented count for ${name} successfully.`);
+    }
+  }
+}
+
 
 function display_Char(values) {
   return Math.floor(Math.random() * values);
