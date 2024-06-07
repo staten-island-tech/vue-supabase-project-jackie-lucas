@@ -113,25 +113,34 @@ const { data, error } = await supabase.auth.getUser();
   } else {
     user.value = data.user.id;
     console.log(user.value, "id")
+    await supabaseLevel(wish_Char.value);
   }
-  await supabaseLevel(wish_Char.value);
 }
+
 async function supabaseLevel(char_List) {
-  for (const name of char_List) {
-    const { data, error } = await supabase
+  const { data, error } = await supabase
+    .from('profiles')
+    .select()
+    .eq('id', user.value).single();
+    console.log(data,"more")
+  console.log(wish_Char.value, "list")
+  char_List.forEach(async (character) => {
+    const char_Name = character.name;
+  console.log(char_Name)
+  const newValue = data[char_Name] + 1;
+  console.log(newValue,"new")
+  const { data: updatedData, error: updateError } = await supabase
       .from('profiles')
-      .update({ count: supabase.sql`count + 1` })
-      .eq('name', user.value)
-      .eq('characterName', name)
+      .update({ [char_Name]: newValue })
+      .eq('id', user.value)
       .single();
-      
-    if (error) {
-      console.error(`Error updating character count for ${name}:`, error.message);
+
+    if (updateError) {
+      console.error('Error updating data:', updateError);
     } else {
-      console.log(`Incremented count for ${name} successfully.`);
+      console.log(`Updated ${char_Name} to ${newValue}`);
     }
-  }
-}
+})}
 
 
 function display_Char(values) {
@@ -142,6 +151,7 @@ function clear() {
   on.value = false;
   wish_Char.value = [];
 }
+
 </script>
 
 <style scoped>

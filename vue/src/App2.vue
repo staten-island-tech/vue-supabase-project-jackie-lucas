@@ -4,14 +4,7 @@ import { ref, watch } from 'vue'
 import { useAuthStore } from '@/stores/auth.js'
 import { supabase } from '@/supabase.js'
 
-const authStore = useAuthStore();
 
-async function signOutUser() {
-  const { error } = await supabase.auth.signOut({ scope: 'local' })
-  if (!error) {
-    authStore.logout();
-  }
-}
 
 const videoplay = ref(true);
 const videoRef = ref(null);
@@ -34,7 +27,7 @@ watch(route, (newRoute) => {
 
 <template>
   <div class="container">
-    <video ref="videoRef" class="video" v-if="videoplay" autoplay muted loop>
+    <video class="video" autoplay muted loop>
       <source src="../../public/train.mp4" type="video/mp4" />
     </video>
     <nav>
@@ -42,7 +35,6 @@ watch(route, (newRoute) => {
         <RouterLink to="/signup">Sign Up</RouterLink>
         <RouterLink to="/login">Login</RouterLink>
       </div>
-      <button @click="signOutUser" class="signoutbutton">Sign Out</button>
     </nav>
   </div>
   <RouterView />
@@ -56,7 +48,7 @@ watch(route, (newRoute) => {
   align-items: center;
   height: 100vh;
   width: 100%;
-  z-index: 0;
+  z-index: -1;
   background-color: black;
 }
 .video {
@@ -66,7 +58,7 @@ watch(route, (newRoute) => {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: -1;
+  z-index: 0;
 }
 .signoutbutton {
   position: absolute;

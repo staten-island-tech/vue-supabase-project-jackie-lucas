@@ -3,6 +3,7 @@
       <nav><RouterLink to="/home" class="home"><img id="home" width="200rem" src="../../public/Icon_Home.png" alt="Home"></RouterLink></nav>
     <div class="charInfo">
         <h1 class="cdataName">{{ cdata.name }}</h1>
+        <h1 class="cdataLevel">Level {{ level }}</h1>
         <img class="cdataRarity" :src="`../../public/${cdata.rarity}.webp`" :alt="`${cdata.rarity} Stars`" />
         <div class="cdataContainer">
             <img class="cdataType" :src="`../../public/Type_${cdata.type}.webp`" :alt="`${cdata.type}`" />
@@ -23,12 +24,13 @@ import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router';
 import { character } from '@/components/character';
 import { supabase } from '@/supabase';
-import { RouterLink, RouterView } from 'vue-router'
 
-const cdata = ref({})
-const charStat = ref([])
-const charName = ref('')
+const cdata = ref({});
+const charStat = ref([]);
+const charName = ref('');
 const route = useRoute();
+const level = ref();
+const user = ref();
 
 async function getCharData() {
     charName.value = route.params.id;
@@ -42,8 +44,28 @@ async function getCharData() {
     console.log('Character Data:', cdata.value)
 }
 
-onMounted(() => {
+
+
+async function supabaseLevel(name) {   
+  const { data, error } = await supabase
+    .from('profiles')
+    .select()
+    .eq('id', user.value).single();
+    console.log(data,"more")
+  console.log(name, "char")
+  level.value = data[name] 
+  console.log(level.value,"new")
+}
+onMounted(async() => {
     getCharData()
+    const { data, error } = await supabase.auth.getUser();
+  if (error) {
+    console.error('Error fetching user IDs:', error);
+  } else {
+    user.value = data.user.id;
+    console.log(user.value, "id")
+    await supabaseLevel(charName.value);
+  }
 })
 </script>
 
@@ -118,7 +140,7 @@ p{
     top: 0;
     right: 5%;
     animation: slideRight 1s ease-in-out 0s forwards;
-    width: 55%;
+    width: 54%;
 }
 .cdataType,
 .cdataPath {
