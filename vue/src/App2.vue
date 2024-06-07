@@ -1,6 +1,15 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import { onMounted, ref } from 'vue'
+import { supabase } from '@/supabase.js'
+    import { useAuthStore } from '@/stores/auth.js';
+
+    const authStore = useAuthStore();
+
+    async function signOutUser() {
+    const { error } = await supabase.auth.signOut({ scope: 'local' })
+    authStore.logout();
+    };
 /* import Account from './components/Account.vue'
 import Auth from './components/Auth.vue'
 import { supabase } from './supabase'
@@ -18,28 +27,45 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="container" style="padding: 50px 0 100px 0">
-  </div>
-  <header>
-
-    <div class="wrapper">
-
+      <video class="video" autoplay muted loop>
+      <source class="video" src="../../public/train.mp4" type="video/mp4" />
+    </video>
+    <div class="container">
       <nav>
-        <RouterLink to="/signup">SignUp</RouterLink>
-        <RouterLink to="/login">LogIn</RouterLink>
-        <RouterLink to="/test">test</RouterLink>
-        <RouterLink to="/exit">exit</RouterLink>
+        <div class="routers">
+        <RouterLink to="/signup">Sign Up</RouterLink>
+        <RouterLink to="/login">Login</RouterLink>
+        <RouterLink to="/exit">Sign Out</RouterLink>
+      </div>
       </nav>
     </div>
-  </header>
-
+    <button class="signoutbutton" v-on:click="signOutUser()">Sign Out</button>
   <RouterView />
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  z-index: 0;
+}
+  .video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+  }
+.signoutbutton{
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .logo {
@@ -47,15 +73,24 @@ header {
   margin: 0 auto 2rem;
 }
 
-nav {
-  width: 100%;
-  font-size: 12px;
+.routers {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  top: 20%;
+  transform: translate(-50%, -50%);
+  width: auto;
+  font-size: 30px;
   text-align: center;
-  margin-top: 2rem;
+  background-color: white;
+  border-radius: 10px;
+  z-index: 0;
 }
 
 nav a.router-link-exact-active {
-  color: var(--color-text);
+  color: black;
 }
 
 nav a.router-link-exact-active:hover {
@@ -64,8 +99,7 @@ nav a.router-link-exact-active:hover {
 
 nav a {
   display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
+  padding: 1rem;
 }
 
 nav a:first-of-type {

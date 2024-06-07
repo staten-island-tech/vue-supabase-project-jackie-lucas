@@ -15,7 +15,7 @@ import { supabase } from '@/supabase.js'
     email: newemail,
     password: newpassword,
     options: {
-      emailRedirectTo: 'http://localhost:5173/about',
+      emailRedirectTo: 'http://localhost:5173/login',
     },
   })
   if (error) {
@@ -28,16 +28,6 @@ import { supabase } from '@/supabase.js'
 
 
 <template>
-      <div class="wrapper">
-
-<nav>
-  <RouterLink to="/" class="home"><img id="home" width="200rem" src="../public/Icon_Home.png" alt="Home"></RouterLink>
-  <RouterLink to="/about">About</RouterLink>
-  <RouterLink to="/test">test</RouterLink>
-  <RouterLink to="/wish">help me</RouterLink>
-  <RouterLink to="/character">help me v32</RouterLink>
-</nav>
-</div>
   <input v-model="Nemail" type="input" />
   <br>
   <input v-model="Npassword" type="input" />

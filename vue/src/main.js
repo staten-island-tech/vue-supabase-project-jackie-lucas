@@ -4,7 +4,7 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 
 import App from './App2.vue'
-import router from './router/index2'
+import router from './router'
 
 const app = createApp(App)
 
