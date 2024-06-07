@@ -21,19 +21,22 @@ onMounted(() => {
   <div class="container" style="padding: 50px 0 100px 0">
   </div>
   <header>
+
     <div class="wrapper">
 
-<nav>
-  <RouterLink to="/" class="home"><img id="home" width="200rem" src="../public/Icon_Home.png" alt="Home"></RouterLink>
-</nav>
-</div>
+      <nav>
+        <RouterLink to="/signup">SignUp</RouterLink>
+        <RouterLink to="/login">LogIn</RouterLink>
+        <RouterLink to="/test">test</RouterLink>
+        <RouterLink to="/exit">exit</RouterLink>
+      </nav>
+    </div>
   </header>
 
   <RouterView />
 </template>
 
 <style scoped>
-
 header {
   line-height: 1.5;
   max-height: 100vh;
@@ -45,21 +48,11 @@ header {
 }
 
 nav {
-
   width: 100%;
   font-size: 12px;
   text-align: center;
   margin-top: 2rem;
 }
-.home {
-  position: absolute;
-  left: 0;
-  top: 0.5rem;
-  z-index: 1;
-  padding: 0;
-  margin: 0;
-  background-color: transparent
-} 
 
 nav a.router-link-exact-active {
   color: var(--color-text);
