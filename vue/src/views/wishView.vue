@@ -108,7 +108,7 @@ function iteration(times) {
   console.log(threeStar.value, "three", threeStarChar.name);
 }
 
-
+console.log(wish_List)
 }
 
 function display_Char(values) {

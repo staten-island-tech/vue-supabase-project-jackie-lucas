@@ -61,6 +61,9 @@ nav {
   .icons{
     margin-top:2%;
   }
+ a{
+    background-color: transparent;
+  }
   #warp, #characters{
     width: 15%;
   }
