@@ -6,6 +6,7 @@ import { supabase } from '@/supabase.js'
 const Uemail = ref("");
 const Upassword = ref("");
 const authStore = useAuthStore();
+const router = useRouter();
 
 async function signInWithEmail() {
   const useremail= Uemail.value;

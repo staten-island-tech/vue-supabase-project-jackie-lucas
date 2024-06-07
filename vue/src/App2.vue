@@ -39,7 +39,6 @@ onMounted(() => {
       </div>
       </nav>
     </div>
-    <button class="signoutbutton" v-on:click="signOutUser()">Sign Out</button>
   <RouterView />
 </template>
 

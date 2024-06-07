@@ -1,6 +1,6 @@
 <template>
     <video autoplay muted loop>
-      <source src="../../public/train.mp4" type="video/mp4" />
+      <source class="video" src="../../public/train.mp4" type="video/mp4" />
     </video>
     <div class="wrapper">
 <nav>
@@ -9,11 +9,21 @@
   <RouterLink to="/test">test</RouterLink>
   <RouterLink to="/wish">help me</RouterLink>
   <RouterLink to="/character">help me v32</RouterLink>
+  <button class="signoutbutton" v-on:click="signOutUser()">Sign Out</button>
 </nav>
 </div>
   </template>
   
-  <script setup></script>
+<script setup>
+import { useAuthStore } from '@/stores/auth.js';
+import { supabase } from '@/supabase.js'
+const authStore = useAuthStore();
+
+async function signOutUser() {
+const { error } = await supabase.auth.signOut({ scope: 'local' })
+authStore.logout();
+};
+</script>
   
   <style scoped>
   video {
