@@ -1,8 +1,8 @@
 <template>
 <nav>
-  <RouterLink to="/home" class="home"><img id="home" width="200rem" src="../Icon_Home.png" alt="Home"></RouterLink>
+  <RouterLink to="/home" class="home"><img id="home" width="200rem" src="../../Icon_Home.png" alt="Home"></RouterLink>
   <div class="icons" id="icons">
-          <RouterLink to="/wish" class="wish"><img id="warp" src="../Icon_Warp.webp" alt="Wish"></RouterLink>
+          <RouterLink to="/wish" class="wish"><img id="warp" src="../../Icon_Warp.webp" alt="Wish"></RouterLink>
           <RouterLink to="/character" class="characters"><img id="characters" src="../Icon_Characters.webp" alt="Characters"></RouterLink>
         </div>
 </nav>
