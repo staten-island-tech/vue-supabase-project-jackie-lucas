@@ -1,9 +1,9 @@
 <template>
   <div class="black"></div>
   <nav>
-    <RouterLink to="/home" class="home"><img id="home" width="200rem" src="../Icon_Home.png" alt="Home"></RouterLink>
+    <RouterLink to="/home" class="home"><img id="home" width="200rem" src="../../public/Icon_Home.png" alt="Home"></RouterLink>
   </nav>
-  <img class="Character_bg" src="../Wallpaper_Ingenium_Dreams.webp" alt="Wallpaper Ingenium Dreams" />
+  <img class="Character_bg" src="../../public/Wallpaper_Ingenium_Dreams.webp" alt="Wallpaper Ingenium Dreams" />
   <h1 class="instructions">Warp Characters to Increase Levels</h1>
   <div class="rarities">
     <div class="rarity" v-for="rarities in character" :key="rarities.rarity">

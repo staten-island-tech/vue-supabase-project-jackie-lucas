@@ -1,29 +1,29 @@
 <template>
   <nav>
-    <RouterLink to="/home" class="home"><img id="home" width="200rem" src="../Icon_Home.png" alt="Home"></RouterLink>
+    <RouterLink to="/home" class="home"><img id="home" width="200rem" src="../../public/Icon_Home.png" alt="Home"></RouterLink>
   </nav>
   <div class="container">
-    <img class="Wish_bg" src="../Wish_bg.avif" />
+    <img class="Wish_bg" src="../../public/Wish_bg.avif" />
     <button class="clear" v-if="on" v-on:click="clear()">
-      <img class="Wish_close" v-if="on" src="../Icon_Close.png" />
+      <img class="Wish_close" v-if="on" src="../../public/Icon_Close.png" />
     </button>
     <div class="WarpBtn">
       <button class="Warp1x" v-on:click="char_Rarity(1)">Warp 1×</button>
       <button class="Warp10x" v-on:click="char_Rarity(10)">Warp 10×</button>
     </div>
     <div class="banner_container">
-      <img class="banner" src="../../Wallpaper_Banner.jpg" />
+      <img class="banner" src="../../public/Wallpaper_Banner.jpg" />
     </div>
     <video class="warpVideo" v-if="fiveStar" autoplay @ended="hideRoll" ref="video">
-      <source src="../../fivestarpulled.mp4" type="video/mp4" />
+      <source src="../../public/fivestarpulled.mp4" type="video/mp4" />
     </video>
 
     <video class="warpVideo" v-if="fourStar" autoplay @ended="hideRoll" ref="video">
-      <source src="../..c/fourstarpulled.mp4" type="video/mp4" />
+      <source src="../../public/fourstarpulled.mp4" type="video/mp4" />
     </video>
 
     <video class="warpVideo" v-if="threeStar" autoplay @ended="hideRoll" ref="video" volume="1000">
-      <source src="../../threestarpulled.mp4" type="video/mp4" />
+      <source src="../../public/threestarpulled.mp4" type="video/mp4" />
     </video>
 
     <button class=skip v-if="fiveStar" v-on:click="skipVideo">

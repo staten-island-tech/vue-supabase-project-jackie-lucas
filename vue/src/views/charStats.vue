@@ -1,6 +1,6 @@
 <template>
     <nav>
-        <RouterLink to="/character" class="home"><img id="home" width="200rem" src="../Icon_Close.png" alt="Close">
+        <RouterLink to="/character" class="home"><img id="home" width="200rem" src="../../public/Icon_Close.png" alt="Close">
         </RouterLink>
     </nav>
     <div class="charInfo">
