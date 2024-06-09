@@ -1,31 +1,25 @@
 <template>
-      <div class="black"></div>
-      <nav><RouterLink to="/home" class="home"><img id="home" width="200rem" src="../../public/Icon_Home.png" alt="Home"></RouterLink></nav>
+    <nav>
+        <RouterLink to="/character" class="home"><img id="home" width="200rem" src="../Icon_Close.png" alt="Close">
+        </RouterLink>
+    </nav>
     <div class="charInfo">
-        <h1 class="cdataName">{{ cdata.name }}</h1>
-<<<<<<< Updated upstream
+        <h1 class="cdataName">{{ cdata.name }}
+        </h1><img class="cdataRarity" :src="`../${cdata.rarity}.webp`" :alt="`${cdata.rarity} Stars`" />
         <h1 class="cdataLevel">Level {{ level }}</h1>
-        <img class="cdataRarity" :src="`../../public/${cdata.rarity}.webp`" :alt="`${cdata.rarity} Stars`" />
-=======
-        <img class="cdataRarity" :src="`../${cdata.rarity}.webp`" :alt="`${cdata.rarity} Stars`" />
-        <h1 class="cdataLevel">Level {{ level }}</h1>
->>>>>>> Stashed changes
+
         <div class="cdataContainer">
-            <img class="cdataType" :src="`../../public/Type_${cdata.type}.webp`" :alt="`${cdata.type}`" />
-            <img class="cdataPath" :src="`../../public/Path_${cdata.path}.webp`" :alt="`${cdata.path}`" />
+            <img class="cdataType" :src="`../Type_${cdata.type}.webp`" :alt="`${cdata.type}`" />
+            <img class="cdataPath" :src="`../Path_${cdata.path}.webp`" :alt="`${cdata.path}`" />
         </div>
     </div>
-<<<<<<< Updated upstream
-    <img class="cdataImg" :src="`../../public/Character_${cdata.img}_Splash_Art.webp`" :alt="`${character.name} Splash Art`" />
-=======
->>>>>>> Stashed changes
+    <img class="cdataImg" :src="`../Character_${cdata.img}_Splash_Art.webp`" :alt="`${cdata.name} Splash Art`" />
     <div class="cdataStats">
         <p class="charHP"> HP: {{ charStat.HP }}</p>
         <p class="charATK"> ATK: {{ charStat.ATK }}</p>
         <p class="charDEF"> DEF: {{ charStat.DEF }}</p>
         <p class="charSPD"> SPD: {{ charStat.SPD }}</p>
     </div>
-    <img class="cdataImg" :src="`../Character_${cdata.img}_Splash_Art.webp`" :alt="`${character.name} Splash Art`" />
 </template>
 
 <script setup>
@@ -55,26 +49,26 @@ async function getCharData() {
 
 
 
-async function supabaseLevel(name) {   
-  const { data, error } = await supabase
-    .from('profiles')
-    .select()
-    .eq('id', user.value).single();
-    console.log(data,"more")
-  console.log(name, "char")
-  level.value = data[name] 
-  console.log(level.value,"new")
-}   
-onMounted(async() => {
+async function supabaseLevel(name) {
+    const { data, error } = await supabase
+        .from('profiles')
+        .select()
+        .eq('id', user.value).single();
+    console.log(data, "more")
+    console.log(name, "char")
+    level.value = data[name]
+    console.log(level.value, "new")
+}
+onMounted(async () => {
     getCharData()
     const { data, error } = await supabase.auth.getUser();
-  if (error) {
-    console.error('Error fetching user IDs:', error);
-  } else {
-    user.value = data.user.id;
-    console.log(user.value, "id")
-    await supabaseLevel(charName.value);
-  }
+    if (error) {
+        console.error('Error fetching user IDs:', error);
+    } else {
+        user.value = data.user.id;
+        console.log(user.value, "id")
+        await supabaseLevel(charName.value);
+    }
 })
 </script>
 
@@ -82,35 +76,40 @@ onMounted(async() => {
 @import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
 
 html,
-body {
+body,
+template {
     margin: 0;
     height: 100%;
     overflow: hidden;
     box-sizing: border-box;
     top: 0;
 }
+
 .home {
-  position: absolute;
-  left: 0;
-  top: 0.5rem;
-  z-index: 99;
-  padding: 0;
-  margin: 0;
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    z-index: 99;
+    padding: 0;
+    margin: 0;
 }
-.black{
+
+.black {
     position: absolute;
     width: 100%;
-    height:100%;
-    left:0;
+    height: 100%;
+    left: 0;
     top: 0;
     z-index: 0;
     background-color: #181818;
-  }
-p{
+}
+
+p {
     font: bold 100% "Lato", sans-serif;
     display: inline-block;
     font-size: 30px;
 }
+
 .charInfo,
 .cdataContainer,
 .cdataImg,
@@ -122,78 +121,97 @@ p{
 .charInfo {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    text-align: center;
     position: absolute;
-<<<<<<< Updated upstream
-    left: 38%;
-    padding: 20px;
-=======
-    left: 10%;
-    top: 15%;
-    gap: 3rem;
-    width: auto;
->>>>>>> Stashed changes
-    border-radius: 10px;
+    top: 40%;
+    left: 25%;
     z-index: 1;
-    animation: slideRight 1s ease-in-out forwards;
+    width: 30%;
+    max-width: 80%;
 }
-.cdataContainer{
+
+
+.cdataContainer {
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1;
-    animation: slideRight 1s ease-in-out 0.5s forwards;
-<<<<<<< Updated upstream
-=======
     top: 20%;
+    width: 20%;
+    height: auto;
     left: 5%;
->>>>>>> Stashed changes
 }
-.cdataImg{
-    position: absolute;
-    justify-self: center;
-    align-items: center;
-    z-index: 1;
-    top: 0;
-    right: 5%;
-    animation: slideRight 1s ease-in-out 0s forwards;
-    width: 54%;
-}
+
 .cdataType,
 .cdataPath {
-    width: 5%;
+    width: 100%;
 }
-.cdataStats{
+
+.cdataImg {
+    position: absolute;
+    z-index: 1;
+    place-self: center;
+    right: 1%;
+    animation: slideLeft 1s ease-in-out 0s forwards;
+    width: 45%;
+}
+
+.cdataStats {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
     z-index: 1;
     position: absolute;
+    place-items: center;
+    top: 45%;
     left: 10%;
-    top: 50%;
-    gap: 1rem;
+    gap: 0.5rem;
 }
-.charHP{
-animation: slideRight 1s ease-in-out 1.5s forwards;
+
+.cdataName {
+    animation: slideLeft 1s ease-in-out 1s forwards;
 }
-.charATK{
-    animation: slideRight 1s ease-in-out 2s forwards;
+
+.cdataRarity {
+    animation: slideLeft 1s ease-in-out 1.3s forwards;
 }
-.charDEF{
-    animation: slideRight 1s ease-in-out 2.5s forwards;
+
+.cdataLevel {
+    animation: slideLeft 1s ease-in-out 2s forwards;
 }
-.charSPD{
-    animation: slideRight 1s ease-in-out 3s forwards;
+
+.cdataType {
+    animation: slideLeft 1s ease-in-out 2.2s forwards;
 }
-@keyframes slideRight {
-    from {
+
+.cdataPath {
+    animation: slideLeft 1s ease-in-out 2.4s forwards;
+}
+
+.charHP {
+    animation: slideLeft 0.5s ease-in-out 1s forwards;
+}
+
+.charATK {
+    animation: slideLeft 0.5s ease-in-out 1.2s forwards;
+}
+
+.charDEF {
+    animation: slideLeft 0.5s ease-in-out 1.4s forwards;
+}
+
+.charSPD {
+    animation: slideLeft 0.5s ease-in-out 1.6s forwards;
+}
+
+@keyframes slideLeft {
+    0% {
         transform: translateX(200%);
         opacity: 0;
         visibility: visible;
     }
-    to {
+
+    100% {
         transform: translateX(0);
         opacity: 1;
         visibility: visible;

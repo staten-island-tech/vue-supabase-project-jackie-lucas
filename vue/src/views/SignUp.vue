@@ -10,9 +10,9 @@ const router = useRouter();
 
 
 
-  async function signUpNewUser() {
-  const newemail= Nemail.value;
-  const newpassword= Npassword.value;  
+async function signUpNewUser() {
+  const newemail = Nemail.value;
+  const newpassword = Npassword.value;
   const perms = true
   console.log(newemail, newpassword)
   const { data, error } = await supabase.auth.signUp({
@@ -31,11 +31,9 @@ const router = useRouter();
 
 <template>
   <form class="signupform" @submit.prevent="signUpNewUser">
-    <input id="email" v-model="Nemail" type="email" required placeholder="Email"/>
+    <input id="email" v-model="Nemail" type="email" required placeholder="Email" />
     <br>
     <input id="password" v-model="Npassword" type="password" required placeholder="Password" minlength="6" />
-    <br>
-    <p class="note">Please note password must be at least 6 characters</p>
     <br>
     <button type="submit" class="signup-button">Sign Up</button>
   </form>
