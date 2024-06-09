@@ -50,6 +50,7 @@ onMounted(async () => {
   z-index: 99;
   padding: 0;
   margin: 0;
+  background-color: transparent;
 }
 
 .instructions {

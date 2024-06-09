@@ -1,6 +1,6 @@
 <template>
     <nav>
-        <RouterLink to="/character" class="home"><img id="home" width="200rem" src="../../public/Icon_Close.png" alt="Close">
+        <RouterLink to="/character" class="home"><img id="home" src="../../public/Icon_Close.png" alt="Close">
         </RouterLink>
     </nav>
     <div class="charInfo">
@@ -85,13 +85,22 @@ template {
     top: 0;
 }
 
-.home {
-    position: absolute;
-    left: 0;
-    top: 0.5rem;
-    z-index: 99;
-    padding: 0;
-    margin: 0;
+.home, #home {
+display: flex;
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  width:20%;
+  height: auto;
+  align-items: center;
+  justify-content: center;
+  transition: 0.5s;
+  border: 0;
+  font: bold 30px Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  color: rgb(173, 129, 248);
+  z-index: 100;
+  background-color: transparent;
+  transition: 0.5s;
 }
 
 .black {
