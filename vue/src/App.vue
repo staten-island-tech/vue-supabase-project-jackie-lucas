@@ -1,42 +1,29 @@
 <script setup>
 import { RouterLink, RouterView, useRoute } from 'vue-router'
 import { ref, watch } from 'vue'
-import { useAuthStore } from '@/stores/auth.js'
-import { supabase } from '@/supabase.js'
 
 
 
 const videoplay = ref(true);
-const videoRef = ref(null);
+const routershow = ref(true)
 const route = useRoute();
 
 watch(route, (newRoute) => {
-  if (newRoute.path !== '') {
-    videoplay.value = false;
-    if (videoRef.value) {
-      videoRef.value.pause();
-    }
-  } else {
-    videoplay.value = true;
-    if (videoRef.value) {
-      videoRef.value.play();
-    }
-  }
+  videoplay.value = newRoute.path === '/' || newRoute.path === '/login' || newRoute.path === '/signup' || newRoute.path === '/home';
+  routershow.value = newRoute.path === '/' || newRoute.path === '/login' || newRoute.path === '/signup'
 });
 </script>
 
 <template>
-  <div class="container">
-    <video class="video" autoplay muted loop>
-      <source v-if="videoplay" src="../public/train.mp4" type="video/mp4" />
-    </video>
-    <nav>
-      <div class="routers">
-        <RouterLink to="/signup">Sign Up</RouterLink>
-        <RouterLink to="/login">Login</RouterLink>
-      </div>
-    </nav>
-  </div>
+  <video v-if="videoplay" class="video" autoplay muted loop>
+    <source src="../public/train.mp4" type="video/mp4" />
+  </video>
+  <nav v-if="routershow">
+    <div class="routers">
+      <RouterLink to="/signup">Sign Up</RouterLink>
+      <RouterLink to="/login">Login</RouterLink>
+    </div>
+  </nav>
   <RouterView />
 </template>
 
@@ -51,6 +38,7 @@ watch(route, (newRoute) => {
   z-index: 0;
   background-color: black;
 }
+
 .video {
   position: absolute;
   top: 0;
@@ -60,53 +48,56 @@ watch(route, (newRoute) => {
   object-fit: cover;
   z-index: -1;
 }
-.signoutbutton {
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 10px;
-}
+
 .routers {
   display: flex;
   justify-content: center;
+  flex-direction: row;
   align-items: center;
   position: absolute;
   top: 20%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 30px;
-  text-align: center;
   background-color: white;
   border-radius: 10px;
   z-index: 0;
 }
+
 nav a.router-link-exact-active {
   color: black;
 }
+
 nav a.router-link-exact-active:hover {
   background-color: transparent;
 }
+
 nav a {
   display: inline-block;
   padding: 1rem;
 }
+
 nav a:first-of-type {
   border: 0;
 }
+
 @media (min-width: 1024px) {
   header {
     display: flex;
     place-items: center;
     padding-right: calc(var(--section-gap) / 2);
   }
+
   .logo {
     margin: 0 2rem 0 0;
   }
+
   header .wrapper {
     display: flex;
     place-items: flex-start;
     flex-wrap: wrap;
   }
+
   nav {
     text-align: left;
     margin-left: -1rem;

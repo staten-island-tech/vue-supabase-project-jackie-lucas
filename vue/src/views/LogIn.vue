@@ -9,15 +9,15 @@ const authStore = useAuthStore();
 const router = useRouter();
 
 async function signInWithEmail() {
-  const useremail= Uemail.value;
-  const userpassword= Upassword.value;
+  const useremail = Uemail.value;
+  const userpassword = Upassword.value;
   console.log(useremail, userpassword);
   const { data, error } = await supabase.auth.signInWithPassword({
     email: useremail,
     password: userpassword,
   })
   if (error) {
-      alert('Incorrect Login Credentials')
+    alert('Incorrect Login Credentials')
   } else {
     alert("Sign In completed.")
     authStore.login();
@@ -29,10 +29,8 @@ async function signInWithEmail() {
 
 <template>
   <form class="loginform" @submit.prevent="signInWithEmail">
-    <label for="email">Email:</label>
     <input id="email" v-model="Uemail" type="email" required placeholder="Email" />
     <br>
-    <label for="password">Password:</label>
     <input id="password" v-model="Upassword" type="password" required placeholder="Password" />
     <br>
     <button type="submit" class="login-button">Sign In</button>
@@ -83,6 +81,7 @@ input {
   font-size: 16px;
   cursor: pointer;
 }
+
 .login-button:hover {
   background: #0056b3;
 }

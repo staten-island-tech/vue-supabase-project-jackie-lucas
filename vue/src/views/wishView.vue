@@ -1,27 +1,29 @@
 <template>
-  <nav><RouterLink to="/home" class="home"><img id="home" width="200rem" src="../../public/Icon_Home.png" alt="Home"></RouterLink></nav>
+  <nav>
+    <RouterLink to="/home" class="home"><img id="home" width="200rem" src="../Icon_Home.png" alt="Home"></RouterLink>
+  </nav>
   <div class="container">
-    <img class="Wish_bg" src="../../public/Wish_bg.avif" />
-      <button class="clear" v-if="on" v-on:click="clear()">
-        <img class="Wish_close" v-if="on" src="../../public/Icon_Close.png" />
-      </button>
+    <img class="Wish_bg" src="../Wish_bg.avif" />
+    <button class="clear" v-if="on" v-on:click="clear()">
+      <img class="Wish_close" v-if="on" src="../Icon_Close.png" />
+    </button>
     <div class="WarpBtn">
       <button class="Warp1x" v-on:click="char_Rarity(1)">Warp 1×</button>
       <button class="Warp10x" v-on:click="char_Rarity(10)">Warp 10×</button>
     </div>
     <div class="banner_container">
-      <img class="banner" src="../../public/Wallpaper_Banner.jpg" />
+      <img class="banner" src="../../Wallpaper_Banner.jpg" />
     </div>
     <video class="warpVideo" v-if="fiveStar" autoplay @ended="hideRoll" ref="video">
-      <source src="../../public/fivestarpulled.mp4" type="video/mp4" />
+      <source src="../../fivestarpulled.mp4" type="video/mp4" />
     </video>
 
     <video class="warpVideo" v-if="fourStar" autoplay @ended="hideRoll" ref="video">
-      <source src="../../public/fourstarpulled.mp4" type="video/mp4" />
+      <source src="../..c/fourstarpulled.mp4" type="video/mp4" />
     </video>
 
     <video class="warpVideo" v-if="threeStar" autoplay @ended="hideRoll" ref="video" volume="1000">
-      <source src="../../public/threestarpulled.mp4" type="video/mp4" />
+      <source src="../../threestarpulled.mp4" type="video/mp4" />
     </video>
 
     <button class=skip v-if="fiveStar" v-on:click="skipVideo">
@@ -33,7 +35,7 @@
     <button class=Skip v-if="threeStar" v-on:click="skipVideo">
       <img class="Skip_wish" v-if="threeStar" src="../../public/Skip_Button.webp" />
     </button>
-    
+
     <img class="vignette" v-if="on" src="../../public/Warp_Result.webp" />
     <div class="wished" v-if="on">
       <wishCard v-for="wish in wish_Char" :key="wish.value" :wish="wish" />
@@ -56,7 +58,7 @@ const wish_Char = ref([]);
 const user = ref();
 
 const video = ref(null);
-function skipVideo(){
+function skipVideo() {
   video.value.currentTime = video.value.duration;
 }
 function hideRoll() {
@@ -95,19 +97,19 @@ async function iteration(times) {
     wish_Char.value.push(random_Character);
   }
   if (wish_Char.value.some(wishedChar => wishedChar.rarity == 5)) {
-  fiveStar.value = true;
-  const fiveStarChar = wish_Char.value.find(char => char.rarity == 5);
-  console.log(fiveStar.value, "five", fiveStarChar.name);
-} else if (wish_Char.value.some(wishedChar => wishedChar.rarity == 4)) {
-  fourStar.value= true;
-  const fourStarChar = wish_Char.value.find(char => char.rarity == 4);
-  console.log(fourStar.value, "four", fourStarChar.name);
-} else if (wish_Char.value.some(wishedChar => wishedChar.rarity == 3)) {
-  threeStar.value= true;
-  const threeStarChar = wish_Char.value.find(char => char.rarity == 3);
-  console.log(threeStar.value, "three", threeStarChar.name);
-}
-const { data, error } = await supabase.auth.getUser();
+    fiveStar.value = true;
+    const fiveStarChar = wish_Char.value.find(char => char.rarity == 5);
+    console.log(fiveStar.value, "five", fiveStarChar.name);
+  } else if (wish_Char.value.some(wishedChar => wishedChar.rarity == 4)) {
+    fourStar.value = true;
+    const fourStarChar = wish_Char.value.find(char => char.rarity == 4);
+    console.log(fourStar.value, "four", fourStarChar.name);
+  } else if (wish_Char.value.some(wishedChar => wishedChar.rarity == 3)) {
+    threeStar.value = true;
+    const threeStarChar = wish_Char.value.find(char => char.rarity == 3);
+    console.log(threeStar.value, "three", threeStarChar.name);
+  }
+  const { data, error } = await supabase.auth.getUser();
   if (error) {
     console.error('Error fetching user IDs:', error);
   } else {
@@ -122,14 +124,14 @@ async function supabaseLevel(char_List) {
     .from('profiles')
     .select()
     .eq('id', user.value).single();
-    console.log(data,"more")
+  //     console.log(data,"more") /*Read Existing Character Level from Supabase */
   console.log(wish_Char.value, "list")
   char_List.forEach(async (character) => {
     const char_Name = character.name;
-  console.log(char_Name)
-  const newValue = data[char_Name] + 1;
-  console.log(newValue,"new")
-  const { data: updatedData, error: updateError } = await supabase
+    /*   console.log(char_Name) */
+    const newValue = data[char_Name] + 1;
+    /*   console.log(newValue,"new") */
+    const { data: updatedData, error: updateError } = await supabase
       .from('profiles')
       .update({ [char_Name]: newValue })
       .eq('id', user.value)
@@ -140,7 +142,8 @@ async function supabaseLevel(char_List) {
     } else {
       console.log(`Updated ${char_Name} to ${newValue}`);
     }
-})}
+  })
+}
 
 
 function display_Char(values) {
@@ -168,9 +171,11 @@ body {
   overflow: hidden;
   box-sizing: border-box;
 }
-a{
+
+a {
   background-color: transparent;
 }
+
 .home {
   position: absolute;
   left: 0;
@@ -179,6 +184,7 @@ a{
   padding: 0;
   margin: 0;
 }
+
 .container {
   position: absolute;
   top: 0;
@@ -189,6 +195,7 @@ a{
   justify-content: center;
   align-items: center;
 }
+
 .warpVideo {
   z-index: 91;
   position: absolute;
@@ -198,6 +205,7 @@ a{
   height: 100%;
   object-fit: fill;
 }
+
 .Wish_bg {
   position: absolute;
   top: 0;
@@ -221,19 +229,19 @@ a{
 }
 
 .wished {
-    top: 5%;
-    display: flex;
-    flex-wrap:wrap;
-    justify-content: center;
-    row-gap: 1rem;
-    column-gap: 0rem;
-    width: 120%;
-    height: 80%; 
-    overflow: hidden;
-    z-index: 3;
-    position: absolute;
-    margin: auto; 
-    padding: 2rem;
+  top: 5%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  row-gap: 1rem;
+  column-gap: 0rem;
+  width: 120%;
+  height: 80%;
+  overflow: hidden;
+  z-index: 3;
+  position: absolute;
+  margin: auto;
+  padding: 2rem;
 }
 
 .banner_container {
@@ -288,7 +296,9 @@ a{
 }
 
 .Clear,
-.Wish_close , .skip, .Skip_wish{
+.Wish_close,
+.skip,
+.Skip_wish {
   display: flex;
   position: absolute;
   top: 0.5rem;
@@ -305,13 +315,15 @@ a{
   background-color: transparent;
   transition: 0.5s;
 }
+
 .Clear:hover {
   border: 0;
   background-color: transparent;
   opacity: 20%;
 }
 
-.skip, .Skip_wish{
+.skip,
+.Skip_wish {
   display: flex;
   position: absolute;
   top: 0.8rem;
@@ -329,6 +341,7 @@ a{
   transition: 0.5s;
   filter: invert(1);
 }
+
 .Warp1x:active,
 .Warp10x:active {
   opacity: 80%;
